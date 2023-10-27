@@ -1,10 +1,10 @@
 # SangamDash : એક સંગમ, એક ડેશબોર્ડ
 
-![SangamDash Logo](https://ucarecdn.com/b5f0d28d-3316-453f-8742-d82386141da4/-/scale_crop/435x109/-/format/auto/-/quality/normal/-/rasterize/)
-
-## Project Purpose
+## Overview
 
 The goal of this project is to create SangamDash—a District Integrated Dashboard—a digital tool and platform designed for the monitoring, analysis, and review of various portals and schemes within a specific district or locality. SangamDash aims to provide comprehensive, real-time information and data to facilitate efficient governance and decision-making.
+
+![SangamDash Logo](https://ucarecdn.com/b5f0d28d-3316-453f-8742-d82386141da4/-/scale_crop/435x109/-/format/auto/-/quality/normal/-/rasterize/)
 
 ## Key Features
 
