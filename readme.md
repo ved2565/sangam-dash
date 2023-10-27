@@ -1,10 +1,10 @@
 # SangamDash : એક સંગમ, એક ડેશબોર્ડ
 
-![SangamDash Logo](https://ucarecdn.com/b5f0d28d-3316-453f-8742-d82386141da4/-/scale_crop/435x109/-/format/auto/-/quality/normal/-/rasterize/)
-
-## Project Purpose
+## Overview
 
 The goal of this project is to create SangamDash—a District Integrated Dashboard—a digital tool and platform designed for the monitoring, analysis, and review of various portals and schemes within a specific district or locality. SangamDash aims to provide comprehensive, real-time information and data to facilitate efficient governance and decision-making.
+
+![SangamDash Logo](https://ucarecdn.com/b5f0d28d-3316-453f-8742-d82386141da4/-/scale_crop/435x109/-/format/auto/-/quality/normal/-/rasterize/)
 
 ## Key Features
 
@@ -53,6 +53,10 @@ SangamDash is built on a robust technology stack to ensure efficiency and reliab
 - **Axios:** Handling HTTP requests for seamless data communication.
 - **MongoDB:** Database management for storing and retrieving data.
 - **Clerk Authentication:** Ensuring secure and authenticated access to the dashboard.
+- **Tailwind CSS:** A utility-first CSS framework for styling and designing your user interface.
+- **Next UI:** [Next UI Docs](https://nextui.org/docs/guide/installation)
+- **React Router:** A standard library for routing in React applications.
+
 
 ## Dependencies / Show Stoppers
 
@@ -81,7 +85,7 @@ Follow these steps to install and run SangamDash on your local machine:
 3. Install dependencies: `npm install`
 4. Run the application: `npm start`
 
-If you encounter any difficulties during the setup or app installation, please feel free to open a discussion or contact the team at [your-email@example.com](mailto:your-email@example.com).
+If you encounter any difficulties during the setup or app installation, please feel free to open a discussion or contact the team at [rudr26@proton.me](mailto:your-email@example.com).
 
 ## Contributions
 
