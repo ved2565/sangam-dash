@@ -53,6 +53,10 @@ SangamDash is built on a robust technology stack to ensure efficiency and reliab
 - **Axios:** Handling HTTP requests for seamless data communication.
 - **MongoDB:** Database management for storing and retrieving data.
 - **Clerk Authentication:** Ensuring secure and authenticated access to the dashboard.
+- **Tailwind CSS:** A utility-first CSS framework for styling and designing your user interface.
+- **Next UI:** [Next UI Docs](https://nextui.org/docs/guide/installation)
+- **React Router:** A standard library for routing in React applications.
+
 
 ## Dependencies / Show Stoppers
 
