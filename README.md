@@ -81,7 +81,7 @@ Follow these steps to install and run SangamDash on your local machine:
 3. Install dependencies: `npm install`
 4. Run the application: `npm start`
 
-If you encounter any difficulties during the setup or app installation, please feel free to open a discussion or contact the team at [your-email@example.com](mailto:your-email@example.com).
+If you encounter any difficulties during the setup or app installation, please feel free to open a discussion or contact the team at [rudr26@proton.me](mailto:your-email@example.com).
 
 ## Contributions
 
