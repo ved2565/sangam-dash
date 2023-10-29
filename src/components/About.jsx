@@ -9,6 +9,7 @@ const About = () => {
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet dolores delectus sit illum odio? Et, tempora animi in, earum iusto magni sed iure quia molestias rem corporis commodi perferendis blanditiis?
       </p>
       <Link to="/">Home</Link>
+      <p>hello</p>
     </div>
   )
 }
