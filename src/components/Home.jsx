@@ -1,6 +1,8 @@
 import React from "react";
 import Lenis from "@studio-freight/lenis";
-import { Link } from "react-router-dom";
+import { Avatar } from "@nextui-org/react";
+import { UsersFour } from "@phosphor-icons/react";
+import ImageGallery from "./ImageGallery";
 
 const lenis = new Lenis();
 
@@ -18,11 +20,34 @@ requestAnimationFrame(raf);
 const Home = () => {
   return (
     <div className="App">
-      <div className="section1 min-h-screen bg-slate-300">
-        <Link to="/about">second</Link>
+      <ImageGallery />
+      <div className="px-10 py-10 w-full justify-around flex flex-row">
+        <Avatar
+          isBordered
+          color="default"
+          fallback={<UsersFour width={28} height={28} />}
+        />
+        <Avatar
+          isBordered
+          color="default"
+          fallback={<UsersFour width={28} height={28} />}
+        />
+        <Avatar
+          isBordered
+          color="default"
+          fallback={<UsersFour width={28} height={28} />}
+        />
+        <Avatar
+          isBordered
+          color="default"
+          fallback={<UsersFour width={28} height={28} />}
+        />
+        <Avatar
+          isBordered
+          color="default"
+          fallback={<UsersFour width={28} height={28} />}
+        />
       </div>
-      <div className="section2 min-h-screen bg-slate-600">Section 2</div>
-      <div className="section3 min-h-screen bg-slate-900">Section 3</div>
     </div>
   );
 };

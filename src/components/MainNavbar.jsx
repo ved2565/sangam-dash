@@ -1,10 +1,8 @@
 import React from "react";
-import {Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Button} from "@nextui-org/react";
-import Logo from "../assets/logo.jsx";
-import { Link } from "react-router-dom";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
+import Logo from '../assets/Logo'
 
-
-export default function MainNavbar() {
+export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
@@ -21,58 +19,54 @@ export default function MainNavbar() {
   ];
 
   return (
-    <Navbar
-      isBordered
-      isMenuOpen={isMenuOpen}
-      onMenuOpenChange={setIsMenuOpen}
-    >
-      <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
-      </NavbarContent>
-
-      <NavbarContent className="sm:hidden pr-3" justify="center">
+    <Navbar onMenuOpenChange={setIsMenuOpen} className="my-2">
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
         <NavbarBrand>
-        <Logo />
+          <Logo />
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarBrand>
-          <Logo />
-          {/* <p className="font-bold text-inherit">ACME</p> */}
-        </NavbarBrand>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Features
+            Monitor
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
+        <NavbarItem>
+          <Link href="#" color="foreground">
+            Analyse
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link color="foreground" href="#">
-            Integrations
+            Review
           </Link>
         </NavbarItem>
       </NavbarContent>
-
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="warning" href="#" variant="flat">
+          <Button as={Link} color="primary" href="#" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
       </NavbarContent>
-
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link to="/about">{item}</Link>
+            <Link
+              color={
+                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+              }
+              className="w-full"
+              href="#"
+              size="lg"
+            >
+              {item}
+            </Link>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
