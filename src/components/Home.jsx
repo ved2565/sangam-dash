@@ -29,9 +29,6 @@ const Home = () => {
 
   return (
     <div className="App">
-      {/* <p>
-        {JSON.stringify(agePops)}
-      </p> */}
       <ImageGallery />
       <DetailsBar/>
       
