@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Lenis from "@studio-freight/lenis";
 import ImageGallery from "./ImageGallery";
 import DetailsBar from "./DetailsBar";
+import axios from "axios";
 
 const lenis = new Lenis();
 
 lenis.on("scroll", (e) => {
-  console.log(e);
+  // console.log(e);
 });
 
 function raf(time) {
@@ -17,10 +18,23 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 const Home = () => {
+  // const [agePops, setAgePops] = useState([]);
+  // useEffect(() => {
+  //   const getAgePops = async () => {
+  //     const res = await axios.get("http://localhost:5000/agepops");
+  //     setAgePops(res.data);
+  //   }
+  //   getAgePops();
+  // }, []);
+
   return (
     <div className="App">
+      {/* <p>
+        {JSON.stringify(agePops)}
+      </p> */}
       <ImageGallery />
       <DetailsBar/>
+      
     </div>
   );
 };

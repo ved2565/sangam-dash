@@ -13,6 +13,7 @@
     "@nextui-org/react": "^2.1.13",
     "@phosphor-icons/react": "^2.0.13",
     "@studio-freight/lenis": "^1.0.27",
+    "axios": "^1.6.0",
     "framer-motion": "^10.16.4",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
