@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Lenis from "@studio-freight/lenis";
 import ImageGallery from "./ImageGallery";
 import DetailsBar from "./DetailsBar";
-import axios from "axios";
 
 const lenis = new Lenis();
 
