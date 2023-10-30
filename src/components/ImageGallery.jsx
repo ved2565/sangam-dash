@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowCircleLeft, ArrowCircleRight, PauseCircle, PlayCircle } from "@phosphor-icons/react";
+import {
+  ArrowCircleLeft,
+  ArrowCircleRight,
+  PauseCircle,
+  PlayCircle,
+} from "@phosphor-icons/react";
 
 const images = [
   "https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png",
@@ -56,17 +61,17 @@ const ImageCarousel = () => {
       <Slide image={images[currentImage]} />
       <div className="flex items-center justify-around my-2">
         <button onClick={handlePrev}>
-          <ArrowCircleLeft width={28} height={28}  weight="duotone"/>
+          <ArrowCircleLeft width={28} height={28} weight="duotone" />
         </button>
         <button onClick={handlePause}>
           {isPaused ? (
-            <PlayCircle width={28} height={28}  weight="duotone"/>
+            <PlayCircle width={28} height={28} weight="duotone" />
           ) : (
-            <PauseCircle width={28} height={28}  weight="duotone"/>
+            <PauseCircle width={28} height={28} weight="duotone" />
           )}
         </button>
         <button onClick={handleNext}>
-          <ArrowCircleRight width={28} height={28}  weight="duotone"/>
+          <ArrowCircleRight width={28} height={28} weight="duotone" />
         </button>
       </div>
     </div>
