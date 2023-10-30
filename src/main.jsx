@@ -11,12 +11,14 @@ import {
 import { NextUIProvider } from "@nextui-org/react";
 import Home from "./components/Home.jsx";
 import About from "./components/About.jsx";
+import PopulationChart from "./components/PopulationChart.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route path="" element={<Home/>} />
       <Route path="/about" element={<About/>} />
+      <Route path="/population" element={<PopulationChart/>} />
     </Route>
   )
 );
