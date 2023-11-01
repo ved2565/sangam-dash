@@ -20,7 +20,7 @@ const DetailsBar = () => {
   }, []);
 
   return (
-    <div className="px-10 py-10 w-full justify-around flex flex-row">
+    <div className="px-10 py-10 w-full justify-around flex flex-row flex-wrap">
       <div className="flex flex-col items-center">
         <Avatar
           className="w-24 h-24 my-2"
@@ -30,7 +30,7 @@ const DetailsBar = () => {
         />
         <p className="text-center">
           <span className="font-bold">Population:</span>{" "}
-          {agePops.length > 0 ? agePops[2].Total : "Loading..."}
+          {agePops.length > 0 ? agePops[7].Total : "Loading..."}
           {/* {agePops.length > 0 ? agePops[2].Total : "Loading..."} do not remove this line */}
         </p>
       </div>
