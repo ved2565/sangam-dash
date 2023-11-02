@@ -19,6 +19,7 @@
     "@visx/shape": "^3.3.0",
     "axios": "^1.6.0",
     "chart.js": "^4.4.0",
+    "crypto-js": "^4.2.0",
     "framer-motion": "^10.16.4",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",

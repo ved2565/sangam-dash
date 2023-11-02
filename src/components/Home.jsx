@@ -30,7 +30,6 @@ const Home = () => {
     <div className="App">
       <ImageGallery />
       <DetailsBar/>
-      
     </div>
   );
 };

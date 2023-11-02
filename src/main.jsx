@@ -12,6 +12,9 @@ import { NextUIProvider } from "@nextui-org/react";
 import Home from "./components/Home.jsx";
 import About from "./components/About.jsx";
 import Population from "./components/Population.jsx"
+import TestData from "./components/Test.jsx";
+import LoginPage from "./components/LoginPage.jsx";
+import RegisterPage from "./components/RegisterPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +22,9 @@ const router = createBrowserRouter(
       <Route path="" element={<Home/>} />
       <Route path="/about" element={<About/>} />
       <Route path="/population" element={<Population/>} />
+      <Route path="/testdata" element={<TestData/>} />
+      <Route path="/login" element={<LoginPage/>} />
+      <Route path="/register" element={<RegisterPage/>} />
     </Route>
   )
 );
