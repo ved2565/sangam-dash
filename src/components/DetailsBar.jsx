@@ -30,8 +30,7 @@ const DetailsBar = () => {
         />
         <p className="text-center">
           <span className="font-bold">Population:</span>{" "}
-          {agePops.length > 0 ? agePops[2].Total : "Loading..."}
-          {/* {agePops.length > 0 ? agePops[2].Total : "Loading..."} do not remove this line */}
+          {agePops.length > 0 ? agePops[7].Total : "Loading..."}
         </p>
       </div>
       <div className="flex flex-col items-center">

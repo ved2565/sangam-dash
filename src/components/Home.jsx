@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Lenis from "@studio-freight/lenis";
 import ImageGallery from "./ImageGallery";
 import DetailsBar from "./DetailsBar";
