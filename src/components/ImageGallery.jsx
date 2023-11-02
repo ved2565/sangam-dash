@@ -8,9 +8,13 @@ import {
 } from "@phosphor-icons/react";
 
 const images = [
-  "https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png",
-  "https://d33wubrfki0l68.cloudfront.net/49de349d12db851952c5556f3c637ca772745316/cfc56/static/images/wallpapers/bridge-02@2x.png",
-  "https://d33wubrfki0l68.cloudfront.net/594de66469079c21fc54c14db0591305a1198dd6/3f4b1/static/images/wallpapers/bridge-01@2x.png",
+  "https://cbpssubscriber.mygov.in/assets/uploads/juGajmc1gOVBUtt5?57",
+  "https://cdn.s3waas.gov.in/s3c361bc7b2c033a83d663b8d9fb4be56e/uploads/2022/08/2022082426.jpg",
+  "https://cdn.s3waas.gov.in/s3c361bc7b2c033a83d663b8d9fb4be56e/uploads/2021/02/2021020877.jpeg",
+  "https://cdn.s3waas.gov.in/s3c361bc7b2c033a83d663b8d9fb4be56e/uploads/2018/08/2018080878.jpg",
+  "https://cdn.s3waas.gov.in/s3c361bc7b2c033a83d663b8d9fb4be56e/uploads/2018/08/2018080824.jpg",
+  "https://cdn.s3waas.gov.in/s3c361bc7b2c033a83d663b8d9fb4be56e/uploads/2018/08/2018080887.jpg"
+
 ];
 
 const Slide = ({ image }) => (
@@ -20,11 +24,12 @@ const Slide = ({ image }) => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    style={{
-      width: "100vw", // Adjust width as needed
-      height: "450px", // Adjust height as needed
-      objectFit: "cover", // Use 'cover' to fit as an object weight="duotone"
-    }}
+    // style={{
+    //   width: "100vw", // Adjust width as needed
+    //   height: "450px", // Adjust height as needed
+    //   objectFit: "cover", // Use 'cover' to fit as an object weight="duotone"
+    // }}
+    className="w-full h-60 sm:h-[450px] object-cover"
   />
 );
 
