@@ -64,7 +64,7 @@ export default function App() {
         <NavbarItem>
           <NavLink to="/register">
             <Button color="primary" href="#" variant="flat">
-              Sign Up
+              Account
             </Button>
           </NavLink>
         </NavbarItem>

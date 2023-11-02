@@ -24,11 +24,12 @@ const Slide = ({ image }) => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    style={{
-      width: "100vw", // Adjust width as needed
-      height: "450px", // Adjust height as needed
-      objectFit: "cover", // Use 'cover' to fit as an object weight="duotone"
-    }}
+    // style={{
+    //   width: "100vw", // Adjust width as needed
+    //   height: "450px", // Adjust height as needed
+    //   objectFit: "cover", // Use 'cover' to fit as an object weight="duotone"
+    // }}
+    className="w-full h-60 sm:h-[450px] object-cover"
   />
 );
 
