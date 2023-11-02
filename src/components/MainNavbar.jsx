@@ -62,9 +62,11 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
+          <NavLink to="/register">
+            <Button color="primary" href="#" variant="flat">
+              Sign Up
+            </Button>
+          </NavLink>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>

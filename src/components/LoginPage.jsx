@@ -17,7 +17,6 @@ const LoginPage = () => {
 
       if (response.status === 200) {
         setMessage("Login successful!");
-        // Redirect to another page or perform additional actions upon successful login
       } else {
         setMessage("Login failed. Please check your credentials.");
       }
