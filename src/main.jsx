@@ -15,6 +15,7 @@ import Population from "./components/Population.jsx"
 import TestData from "./components/Test.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import RegisterPage from "./components/RegisterPage.jsx";
+import UploadCSV from "./components/UploadCSV.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path="" element={<Home/>} />
       <Route path="/about" element={<About/>} />
       <Route path="/population" element={<Population/>} />
+      <Route path="/upload" element={<UploadCSV/>} />
       <Route path="/testdata" element={<TestData/>} />
       <Route path="/login" element={<LoginPage/>} />
       <Route path="/register" element={<RegisterPage/>} />
