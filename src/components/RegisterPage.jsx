@@ -21,7 +21,7 @@ const RegisterPage = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post("http://localhost:6969/register", {
+      const response = await axios.post("https://mehdb.vercel.app/register", {
         username,
         email,
         password,

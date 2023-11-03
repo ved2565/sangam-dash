@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Card,
   CardHeader,
@@ -6,56 +6,71 @@ import {
   CardFooter,
   Divider,
   Button,
-  Input
+  Textarea,
 } from "@nextui-org/react";
 import Logo from "../assets/Logo";
 import Papa from "papaparse";
 import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function UploadCSV() {
   const [csvData, setCsvData] = useState(null);
-  const [message, setMessage] = useState("");
-  const [file, setFile] = useState(null);
+  const [selectedFileName, setSelectedFileName] = useState("");
+  const fileInputRef = useRef(null);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setSelectedFileName(selectedFile.name);
+
+    Papa.parse(selectedFile, {
+      header: true,
+      dynamicTyping: true,
+      complete: (result) => {
+        setCsvData(result.data);
+      },
+      skipEmptyLines: true,
+    });
   };
 
   const handleButtonClick = () => {
-    if (file) {
-      Papa.parse(file, {
-        header: true,
-        dynamicTyping: true,
-        complete: (result) => {
-          setCsvData(result.data);
-        },
-        skipEmptyLines: true,
-      });
-    }
+    fileInputRef.current.click();
   };
 
   const handleSubmit = async () => {
-    if (!csvData) {
-      setMessage("Please upload a CSV file first.");
+    const fileInput = fileInputRef.current;
+    if (!fileInput || !fileInput.files || !fileInput.files[0]) {
+      toast.error("Please upload a CSV file first.");
       return;
     }
 
+    const selectedFile = fileInput.files[0];
+
+    Papa.parse(selectedFile, {
+      header: true,
+      dynamicTyping: true,
+      complete: (result) => {
+        setCsvData(result.data);
+      },
+      skipEmptyLines: true,
+    });
+
     try {
-      const response = await axios.post("http://localhost:6969/upload", {
+      const response = await axios.post("https://mehdb.vercel.app/upload", {
         csvData: csvData,
       });
 
-
-       
-
       if (response.status === 200) {
-        setMessage("Upload successful!");
+        toast.success("Upload successful!");
+        // Clear the file input
+        fileInput.value = null;
+        // Clear selected file name
+        setSelectedFileName("");
       } else {
-        setMessage("Upload failed. Please check your request.");
+        toast.error("Upload failed. Please check your request.");
       }
     } catch (error) {
       console.error("Error:", error);
-      setMessage(`Upload failed. ${error.message}`);
+      toast.error(`Upload failed. ${error.message}`);
     }
   };
 
@@ -71,27 +86,37 @@ export default function UploadCSV() {
         </CardBody>
         <Divider />
         <CardBody>
-          <Input type="file" onChange={handleFileChange} />
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+          />
           <label htmlFor="fileInput">
             <Button component="span" onClick={handleButtonClick}>
               Upload CSV
             </Button>
           </label>
+          {/* Display the selected file name */}
+          {selectedFileName && <p>Selected File: {selectedFileName}</p>}
+
+          {/* Display the file data preview */}
+          {csvData && (
+            <Textarea
+              isReadOnly
+              variant="bordered"
+              labelPlacement="outside"
+              defaultValue={JSON.stringify(csvData, null, 2)}
+              className="max-w-xs"
+            ></Textarea>
+          )}
         </CardBody>
         <Divider />
         <CardFooter>
-          <Button onClick={handleSubmit}>
-            Submit
-          </Button>
+          <Button onClick={handleSubmit}>Submit</Button>
         </CardFooter>
       </Card>
-      {csvData && (
-        <div>
-          <h2>CSV Data in JSON format:</h2>
-          <pre>{JSON.stringify(csvData, null, 2)}</pre>
-        </div>
-      )}
-      {message && <p>{message}</p>}
+      <Toaster position="top-center" />
     </div>
   );
 }
