@@ -26,13 +26,13 @@ export default function UserProfile() {
   const toggleVisibility = () => setIsVisible(!isVisible);
   return (
     <div className="flex justify-center">
-      <Card className="min-w-[800px]">
+      <Card className=" max-w-[400px] md:min-w-[800px]">
         <CardHeader className="flex justify-around gap-3">
-          <Logo />
+          {/* <Logo />
           <div className="flex flex-col">
             <p className="text-md">First Last</p>
             <p className="text-small text-default-500">@username</p>
-          </div>
+          </div> */}
         </CardHeader>
         <Divider />
         <CardBody>
@@ -98,10 +98,9 @@ export default function UserProfile() {
         <CardFooter>
           <Link
             isExternal
-            showAnchorIcon
             href="https://github.com/nextui-org/nextui"
           >
-            Visit source code on GitHub.
+            {/* Visit source code on GitHub. */}
           </Link>
         </CardFooter>
       </Card>
