@@ -16,18 +16,12 @@ import { NavLink } from "react-router-dom";
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  // const menuItems = [
+  //   "Population",
+  //   "Upload CSV",
+  //   "Demography",
+  //   "Profile",
+  // ];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} className="">
@@ -45,49 +39,37 @@ export default function App() {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Monitor
-          </Link>
+          <NavLink to = "/population">
+            Population
+          </NavLink>
         </NavbarItem>
         <NavbarItem>
-          <Link href="#" color="foreground">
-            Analyse
-          </Link>
+          <NavLink to="/upload">
+            Upload CSV
+          </NavLink>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Review
-          </Link>
+          <NavLink to="/demography">
+            Demography
+          </NavLink>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <NavLink to="/register">
-            <Button color="primary" href="#" variant="flat">
-              Account
-            </Button>
+          <NavLink to="/profile">
+            <div className="bg-blue-300 py-2 rounded-xl px-4 text-gray-800 hover:bg-blue-200">
+              Profile
+            </div>
           </NavLink>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
+          <NavbarMenuItem className="flex flex-col">
+            <NavLink to="/population">Population</NavLink>
+            <NavLink to="/upload">Upload CSV</NavLink>
+            <NavLink to="/demography">Demography</NavLink>
+            <NavLink to="/profile">Profile</NavLink>
           </NavbarMenuItem>
-        ))}
       </NavbarMenu>
     </Navbar>
   );
