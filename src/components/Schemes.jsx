@@ -10,6 +10,9 @@ import {
   Button,
 } from "@nextui-org/react";
 import axios from "axios";
+import { Pen } from "@phosphor-icons/react";
+import { Trash } from "@phosphor-icons/react";
+import { Eye } from "@phosphor-icons/react";
 
 const SchemeList = () => {
   const [schemes, setSchemes] = useState([]);
@@ -50,7 +53,7 @@ const SchemeList = () => {
   };
 
   return (
-    <div className="w-[55%]">
+    <div className="w-[48%]">
       {error && <p>Error: {error}</p>}
       <Table aria-label="Schemes table">
         <TableHeader>
@@ -74,25 +77,33 @@ const SchemeList = () => {
               <TableCell>{scheme.timeOfschemeAdded}</TableCell>
               <TableCell>{scheme.date}</TableCell>
               <TableCell>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center">
                   <Tooltip content="View Scheme">
-                    <Button onClick={() => handleView(scheme._id)} variant="ghost">
-                      View
+                    <Button
+                      onClick={() => handleView(scheme._id)}
+                      variant="ghost"
+                      className="min-w-[40px]"
+                    >
+                      <Eye size={24} weight="duotone" />
                     </Button>
                   </Tooltip>
                   <Tooltip content="Edit Scheme">
-                    <Button onClick={() => handleEdit(scheme._id)} variant="ghost">
-                      Edit
+                    <Button
+                      onClick={() => handleEdit(scheme._id)}
+                      variant="ghost"
+                      className="min-w-[40px]"
+                    >
+                      <Pen size={24} weight="duotone" />
                     </Button>
                   </Tooltip>
                   <Tooltip content="Delete Scheme">
-                    <Button onClick={() => handleDelete(scheme._id)} variant="ghost" color="error">
-                      Delete
-                    </Button>
-                  </Tooltip>
-                  <Tooltip content="Delete Scheme">
-                    <Button onClick={() => handleDelete(scheme._id)} variant="ghost" color="error">
-                      Add
+                    <Button
+                      onClick={() => handleDelete(scheme._id)}
+                      variant="ghost"
+                      color="danger"
+                      className="min-w-[40px]"
+                    >
+                      <Trash size={24} weight="duotone" />
                     </Button>
                   </Tooltip>
                 </div>
