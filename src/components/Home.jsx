@@ -32,9 +32,13 @@ const Home = () => {
     <div className="mx-4">
       {/* <ImageGallery /> */}
       <DetailsBar />
-      <div className="flex justify-around">
-        <PopulationChart />
-        <Schemes />
+      <div className="flex justify-between gap-2">
+        <div className="w-1/3 mx-4">
+          <PopulationChart />
+        </div>
+        <div className="w-full mx-4">
+          <Schemes />
+        </div>
       </div>
     </div>
   );

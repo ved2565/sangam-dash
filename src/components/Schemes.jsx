@@ -65,7 +65,7 @@ const SchemeList = () => {
   
 
   return (
-    <div className="w-[48%]">
+    <div className="">
       {error && <p>Error: {error}</p>}
       <Table aria-label="Schemes table">
         <TableHeader>
