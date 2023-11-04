@@ -10,6 +10,9 @@ import {
   Button,
 } from "@nextui-org/react";
 import axios from "axios";
+import { Pen } from "@phosphor-icons/react";
+import { Trash } from "@phosphor-icons/react";
+import { Eye } from "@phosphor-icons/react";
 
 const SchemeList = () => {
   const [schemes, setSchemes] = useState([]);
@@ -74,21 +77,23 @@ const SchemeList = () => {
               <TableCell>{scheme.timeOfschemeAdded}</TableCell>
               <TableCell>{scheme.date}</TableCell>
               <TableCell>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center">
                   <Tooltip content="View Scheme">
                     <Button
                       onClick={() => handleView(scheme._id)}
                       variant="ghost"
+                      className="min-w-[40px]"
                     >
-                      View
+                      <Eye size={24} weight="duotone" />
                     </Button>
                   </Tooltip>
                   <Tooltip content="Edit Scheme">
                     <Button
                       onClick={() => handleEdit(scheme._id)}
                       variant="ghost"
+                      className="min-w-[40px]"
                     >
-                      Edit
+                      <Pen size={24} weight="duotone" />
                     </Button>
                   </Tooltip>
                   <Tooltip content="Delete Scheme">
@@ -96,8 +101,9 @@ const SchemeList = () => {
                       onClick={() => handleDelete(scheme._id)}
                       variant="ghost"
                       color="danger"
+                      className="min-w-[40px]"
                     >
-                      Delete
+                      <Trash size={24} weight="duotone" />
                     </Button>
                   </Tooltip>
                 </div>

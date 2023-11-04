@@ -22,7 +22,7 @@ const PopulationData = () => {
   ).slice(0, 7);
 
   return (
-    <div className="flex" style={{ fontSize: '16px' }}>
+    <div className="flex" style={{ fontSize: '16px' }} >
       <ul>
         {labels.map((label, index) => (
           <li className="font-bold" key={index}>
