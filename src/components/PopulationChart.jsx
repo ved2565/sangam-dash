@@ -2,6 +2,7 @@ import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Card, CardBody } from "@nextui-org/react";
 
 const PopulationChart = () => {
   const [agePops, setAgePops] = useState([]);
@@ -50,7 +51,15 @@ const PopulationChart = () => {
 
   return (
     <div>
-      <Bar data={chartData} options={options} style={{ height: '300px', width: '100%' }} />
+      <Card className="w-full mx-4">
+        <CardBody>
+          <Bar
+            data={chartData}
+            options={options}
+            style={{ height: "300px", width: "100%" }}
+          />
+        </CardBody>
+      </Card>
     </div>
   );
 };
