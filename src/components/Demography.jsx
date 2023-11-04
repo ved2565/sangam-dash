@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../index.css"; // You can create a separate CSS file for styles
 
-const PathWithText = ({ pathId, fillColor, textContent, to }) => {
+const PathWithText = ({ pathId, fillColor, textContent, to, fontSize }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
