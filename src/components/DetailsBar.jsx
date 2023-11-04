@@ -15,7 +15,7 @@ const DetailsBar = () => {
   useEffect(() => {
     const getAgePops = async (taluka) => {
       try {
-        const res = await axios.get("http://mehdb.vercel.app/agepops");
+        const res = await axios.get("https://mehdb.vercel.app/agepops");
         const data = res.data;
         setAgePops(data);
       } catch (error) {
