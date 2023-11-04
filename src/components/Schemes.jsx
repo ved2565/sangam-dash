@@ -47,10 +47,22 @@ const SchemeList = () => {
     console.log("Edit Scheme:", schemeId);
   };
 
-  const handleDelete = (schemeId) => {
-    // Add logic to handle deleting scheme
-    console.log("Delete Scheme:", schemeId);
+  const handleDelete = async (schemeId) => {
+    try {
+      const response = await axios.get(`https://mehdb.vercel.app/deletescheme/${schemeId}`);
+  
+      if (response.status === 200) {
+        // Remove the deleted scheme from the local state
+        setSchemes((prevSchemes) => prevSchemes.filter((scheme) => scheme._id !== schemeId));
+        console.log("Scheme deleted successfully!");
+      } else {
+        console.log("Failed to delete scheme.");
+      }
+    } catch (error) {
+      console.error("Error deleting scheme:", error.message);
+    }
   };
+  
 
   return (
     <div className="">
