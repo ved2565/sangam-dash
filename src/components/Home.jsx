@@ -1,8 +1,9 @@
 import React from "react";
 import Lenis from "@studio-freight/lenis";
-import ImageGallery from "./ImageGallery";
+// import ImageGallery from "./ImageGallery";
 import DetailsBar from "./DetailsBar";
 import PopulationChart from "./PopulationChart";
+import Schemes from "./Schemes";
 
 const lenis = new Lenis();
 
@@ -31,8 +32,9 @@ const Home = () => {
     <div className="mx-4">
       {/* <ImageGallery /> */}
       <DetailsBar />
-      <div className="flex w-1/2">
+      <div className="flex justify-around">
         <PopulationChart />
+        <Schemes />
       </div>
     </div>
   );
