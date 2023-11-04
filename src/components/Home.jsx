@@ -32,10 +32,10 @@ const Home = () => {
     <div className="mx-4">
       {/* <ImageGallery /> */}
       <DetailsBar />
-      <div className="flex w-1/2">
+      <div className="flex justify-around">
         <PopulationChart />
+        <Schemes />
       </div>
-      <Schemes />
     </div>
   );
 };

@@ -1,37 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@nextui-org/react";
+import axios from "axios";
 
-const Scheme = () => {
+const SchemeList = () => {
   const [schemes, setSchemes] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchSchemes = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('https://mehdb.vercel.app/addScheme');
+        const response = await axios.get("https://mehdb.vercel.app/getscheme");
 
-        if (response.status !== 200) {
-          throw new Error('Network response was not ok');
+        if (response.status === 200) {
+          setSchemes(response.data);
+        } else {
+          setError("Failed to fetch data");
         }
-
-        setSchemes(response.data); // Assuming the response is an array of schemes
       } catch (error) {
-        console.error('Error fetching schemes:', error.message);
+        console.error("Error fetching data:", error.message);
+        setError("Internal server error");
       }
     };
 
-    fetchSchemes();
-  }, []); // The empty dependency array ensures that this effect runs once when the component mounts
+    fetchData();
+  }, []); // Empty dependency array ensures this runs only once on component mount
 
   return (
-    <div>
-      <h2>Scheme List</h2>
-      <ul>
-        {schemes.map((scheme) => (
-          <li key={scheme.id}>{scheme.schemename}</li>
-        ))}
-      </ul>
+    <div className="w-1/2">
+      {error && <p>Error: {error}</p>}
+      <Table aria-label="Schemes table">
+        <TableHeader>
+          {/* <TableColumn>ID</TableColumn> */}
+          <TableColumn>Sr. No.</TableColumn>
+          <TableColumn>Scheme Name</TableColumn>
+          <TableColumn>Ministry</TableColumn>
+          <TableColumn>Description</TableColumn>
+          <TableColumn>Place</TableColumn>
+          <TableColumn>Time of Scheme Added</TableColumn>
+          <TableColumn>Date</TableColumn>
+        </TableHeader>
+        <TableBody>
+          {schemes.map((scheme) => (
+            <TableRow key={scheme._id}>
+              {/* <TableCell>{scheme._id}</TableCell> */}
+              <TableCell>{scheme.srno}</TableCell>
+              <TableCell>{scheme.schemename}</TableCell>
+              <TableCell>{scheme.ministry}</TableCell>
+              <TableCell>{scheme.desc}</TableCell>
+              <TableCell>{scheme.place}</TableCell>
+              <TableCell>{scheme.timeOfschemeAdded}</TableCell>
+              <TableCell>{scheme.date}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 };
 
-export default Scheme;
+export default SchemeList;
