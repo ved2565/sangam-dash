@@ -50,7 +50,7 @@ const SchemeList = () => {
   };
 
   return (
-    <div className="w-[55%]">
+    <div className="w-[48%]">
       {error && <p>Error: {error}</p>}
       <Table aria-label="Schemes table">
         <TableHeader>
@@ -76,23 +76,28 @@ const SchemeList = () => {
               <TableCell>
                 <div className="flex items-center space-x-2">
                   <Tooltip content="View Scheme">
-                    <Button onClick={() => handleView(scheme._id)} variant="ghost">
+                    <Button
+                      onClick={() => handleView(scheme._id)}
+                      variant="ghost"
+                    >
                       View
                     </Button>
                   </Tooltip>
                   <Tooltip content="Edit Scheme">
-                    <Button onClick={() => handleEdit(scheme._id)} variant="ghost">
+                    <Button
+                      onClick={() => handleEdit(scheme._id)}
+                      variant="ghost"
+                    >
                       Edit
                     </Button>
                   </Tooltip>
                   <Tooltip content="Delete Scheme">
-                    <Button onClick={() => handleDelete(scheme._id)} variant="ghost" color="error">
+                    <Button
+                      onClick={() => handleDelete(scheme._id)}
+                      variant="ghost"
+                      color="danger"
+                    >
                       Delete
-                    </Button>
-                  </Tooltip>
-                  <Tooltip content="Delete Scheme">
-                    <Button onClick={() => handleDelete(scheme._id)} variant="ghost" color="error">
-                      Add
                     </Button>
                   </Tooltip>
                 </div>
