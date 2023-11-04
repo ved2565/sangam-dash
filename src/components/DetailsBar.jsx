@@ -8,6 +8,14 @@ import {
 } from "@phosphor-icons/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  Divider,
+  CardBody,
+  Link,
+} from "@nextui-org/react";
 
 const DetailsBar = () => {
   const [agePops, setAgePops] = useState([]);
@@ -33,62 +41,116 @@ const DetailsBar = () => {
     ? selectedTalukaData["Total"]
     : "Data not available";
   return (
-    <div className="px-10 py-10 w-full justify-around flex flex-row flex-wrap">
-      <div className="flex flex-col items-center my-4 mx-4">
-        <Avatar
-          className="w-20 h-20 my-2"
-          isBordered
-          color="default"
-          fallback={<UsersFour size={40} color="#507dbc" weight="duotone" />}
-        />
-        <p className="text-center">
-          <span className="font-bold">Population: </span>
-          {population}
-        </p>
+    <div className="w-full justify-around flex flex-row flex-wrap bg-slate- rounded-lg">
+      <div className="flex flex-col items-center my-4 mx-2">
+        <Card className="">
+          <CardBody className="min-w-[260px] ">
+            <div className="flex justify-start items-center gap-5 ">
+            <div className="flex justify-center my-2">
+              <Avatar
+                className="w-12 h-12 bg-white"
+                isBordered
+                color="default"
+                fallback={
+                  <UsersFour size={22} color="#74c69d" weight="duotone" />
+                }
+              />
+            </div>
+            <div className="flex flex-col ">
+              <p className=" text-2xl font-mono ">{population}</p>
+              <span className="text-sm">Total Population</span>
+            </div>
+          </div>
+          </CardBody>
+        </Card>
       </div>
-      <div className="flex flex-col items-center my-4 mx-4">
-        <Avatar
-          className="w-20 h-20 my-2"
-          isBordered
-          color="default"
-          fallback={<MapTrifold size={40} color="#74c69d" weight="duotone" />}
-        />
-        <p className="text-center">
-          <span className="font-bold">Area:</span> 4484.10 sq km
-        </p>
+      <div className="flex flex-col items-center my-4 mx-2 ">
+      <Card className="">
+          <CardBody className="min-w-[260px] ">
+            <div className="flex justify-start items-center gap-5 ">
+            <div className="flex justify-center my-2">
+              <Avatar
+                className="w-12 h-12 bg-white"
+                isBordered
+                color="default"
+                fallback={
+                  <MapTrifold size={22} color="#74c69d" weight="duotone" />
+                }
+              />
+            </div>
+            <div className="flex flex-col ">
+              <p className=" text-2xl font-mono ">4484.10<span className="text-sm">sq km</span></p>
+              <span className="text-sm">Area</span>
+            </div>
+          </div>
+          </CardBody>
+        </Card>
       </div>
-      <div className="flex flex-col items-center my-4 mx-4">
-        <Avatar
-          className="w-20 h-20 my-2"
-          isBordered
-          color="default"
-          fallback={<Siren size={40} color="#ff0000" weight="duotone" />}
-        />
-        <p className="text-center">
-          <span className="font-bold">Sub Divisions:</span> 4
-        </p>
+      <div className="flex flex-col items-center my-4 mx-2">
+      <Card className="">
+          <CardBody className="min-w-[260px] ">
+            <div className="flex justify-start items-center gap-5 ">
+            <div className="flex justify-center my-2">
+              <Avatar
+                className="w-12 h-12 bg-white"
+                isBordered
+                color="default"
+                fallback={
+                  <Siren size={22} color="#74c69d" weight="duotone" />
+                }
+              />
+            </div>
+            <div className="flex flex-col ">
+              <p className=" text-2xl font-mono ">4</p>
+              <span className="text-sm">Sub Divison</span>
+            </div>
+          </div>
+          </CardBody>
+        </Card>
       </div>
-      <div className="flex flex-col items-center my-4 mx-4">
-        <Avatar
-          className="w-20 h-20 my-2"
-          isBordered
-          color="default"
-          fallback={<MapPinLine size={40} color="#219ebc" weight="duotone" />}
-        />
-        <p className="text-center">
-          <span className="font-bold">Talukas:</span> 10
-        </p>
+      <div className="flex flex-col items-center my-4 mx-2">
+      <Card className="">
+          <CardBody className="min-w-[260px] ">
+            <div className="flex justify-start items-center gap-5 ">
+            <div className="flex justify-center my-2">
+              <Avatar
+                className="w-12 h-12 bg-white"
+                isBordered
+                color="default"
+                fallback={
+                  <MapPinLine size={22} color="#74c69d" weight="duotone" />
+                }
+              />
+            </div>
+            <div className="flex flex-col ">
+              <p className=" text-2xl font-mono ">10</p>
+              <span className="text-sm">Talukas</span>
+            </div>
+          </div>
+          </CardBody>
+        </Card>
       </div>
-      <div className="flex flex-col items-center my-4 mx-4">
-        <Avatar
-          className="w-20 h-20 my-2"
-          isBordered
-          color="default"
-          fallback={<Plant size={32} color="#008000" weight="duotone" />}
-        />
-        <p className="text-center">
-          <span className="font-bold">Villages:</span> 614
-        </p>
+      <div className="flex flex-col items-center my-4 mx-2">
+      <Card className="">
+          <CardBody className="min-w-[260px] ">
+            <div className="flex justify-start items-center gap-5 ">
+            <div className="flex justify-center my-2">
+              <Avatar
+                className="w-12 h-12 bg-white"
+                isBordered
+                color="default"
+                fallback={
+                  <Plant size={22} color="#74c69d" weight="duotone" />
+                }
+              />
+            </div>
+            <div className="flex flex-col ">
+              <p className=" text-2xl font-mono ">614</p>
+              <span className="text-sm">Villages</span>
+            </div>
+          </div>
+          </CardBody>
+        </Card>
       </div>
     </div>
   );

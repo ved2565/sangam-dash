@@ -2,6 +2,7 @@ import React from "react";
 import Lenis from "@studio-freight/lenis";
 import ImageGallery from "./ImageGallery";
 import DetailsBar from "./DetailsBar";
+import PopulationChart from "./PopulationChart";
 
 const lenis = new Lenis();
 
@@ -27,9 +28,12 @@ const Home = () => {
   // }, []);
 
   return (
-    <div className="App">
-      <ImageGallery />
-      <DetailsBar/>
+    <div className="mx-4">
+      {/* <ImageGallery /> */}
+      <DetailsBar />
+      <div className="flex w-1/2">
+        <PopulationChart />
+      </div>
     </div>
   );
 };
