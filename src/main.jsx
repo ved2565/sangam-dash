@@ -17,7 +17,6 @@ import UploadCSV from "./components/UploadCSV.jsx";
 import UserProfile from "./components/UserProfile.jsx";
 import Demography from "./components/Demography.jsx";
 import AddSchemes from "./components/AddSchmes.jsx";
-import AddSchemes from "./components/AddScheme.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,7 +30,6 @@ const router = createBrowserRouter(
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/profile" element={<UserProfile />} />
       <Route path="/addScheme" element={<AddSchemes />} />
-      <Route path="/addscheme" element={<AddSchemes />} />
     </Route>
   )
 );
