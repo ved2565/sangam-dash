@@ -22,6 +22,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       console.error("Error:", error);
+      // eslint-disable-next-line no-undef
       if ( response.status === 401 ) {
         setMessage("Login failed. Please check your credentials.");
       } else {

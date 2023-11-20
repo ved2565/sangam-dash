@@ -10,15 +10,15 @@ import {
   Button,
 } from "@nextui-org/react";
 import axios from "axios";
-import { Pen } from "@phosphor-icons/react";
-import { Trash } from "@phosphor-icons/react";
-import { Eye } from "@phosphor-icons/react";
+import { Pen, Trash, Eye } from "@phosphor-icons/react";
 import { NavLink } from "react-router-dom";
 import { PlusCircle } from "@phosphor-icons/react";
 
 const SchemeList = () => {
   const [schemes, setSchemes] = useState([]);
   const [error, setError] = useState(null);
+  const [editingScheme, setEditingScheme] = useState({});
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +37,7 @@ const SchemeList = () => {
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures this runs only once on component mount
+  }, []);
 
   const handleView = (schemeId) => {
     // Add logic to handle viewing details
@@ -59,7 +59,6 @@ const SchemeList = () => {
     }
   };
 
-  // Function to handle save edit button click
   const handleSaveEdit = async () => {
     try {
       const response = await axios.put(
@@ -83,7 +82,6 @@ const SchemeList = () => {
     }
   };
 
-  // Function to handle cancel edit button click
   const handleCancelEdit = () => {
     setIsEditModalOpen(false);
   };
@@ -95,7 +93,6 @@ const SchemeList = () => {
       );
 
       if (response.status === 200) {
-        // Remove the deleted scheme from the local state
         setSchemes((prevSchemes) =>
           prevSchemes.filter((scheme) => scheme._id !== schemeId)
         );
