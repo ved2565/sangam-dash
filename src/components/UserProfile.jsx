@@ -6,9 +6,7 @@ import {
   CardFooter,
   Divider,
   Link,
-  Image,
 } from "@nextui-org/react";
-import Logo from "../assets/Logo";
 import { Input } from "@nextui-org/react";
 import { EyeSlashFilledIcon } from "./icons/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "./icons/EyeFilledIcon";
