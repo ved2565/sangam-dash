@@ -13,6 +13,8 @@ import axios from "axios";
 import { Pen } from "@phosphor-icons/react";
 import { Trash } from "@phosphor-icons/react";
 import { Eye } from "@phosphor-icons/react";
+import { NavLink } from "react-router-dom";
+import { PlusCircle } from "@phosphor-icons/react";
 
 const SchemeList = () => {
   const [schemes, setSchemes] = useState([]);
@@ -42,18 +44,61 @@ const SchemeList = () => {
     console.log("View Scheme:", schemeId);
   };
 
-  const handleEdit = (schemeId) => {
-    // Add logic to handle editing scheme
-    console.log("Edit Scheme:", schemeId);
+  const handleEdit = async (schemeId) => {
+    try {
+      const response = await axios.get(`https://mehdb.vercel.app/getscheme/${schemeId}`);
+
+      if (response.status === 200) {
+        setEditingScheme(response.data);
+        setIsEditModalOpen(true);
+      } else {
+        console.log("Failed to fetch scheme details for editing.");
+      }
+    } catch (error) {
+      console.error("Error fetching scheme details for editing:", error.message);
+    }
+  };
+
+  // Function to handle save edit button click
+  const handleSaveEdit = async () => {
+    try {
+      const response = await axios.put(
+        `https://mehdb.vercel.app/updatescheme/${editingScheme._id}`,
+        editingScheme
+      );
+
+      if (response.status === 200) {
+        setSchemes((prevSchemes) =>
+          prevSchemes.map((scheme) =>
+            scheme._id === editingScheme._id ? editingScheme : scheme
+          )
+        );
+        setIsEditModalOpen(false);
+        console.log("Scheme edited successfully!");
+      } else {
+        console.log("Failed to edit scheme.");
+      }
+    } catch (error) {
+      console.error("Error editing scheme:", error.message);
+    }
+  };
+
+  // Function to handle cancel edit button click
+  const handleCancelEdit = () => {
+    setIsEditModalOpen(false);
   };
 
   const handleDelete = async (schemeId) => {
     try {
-      const response = await axios.get(`https://mehdb.vercel.app/deletescheme/${schemeId}`);
-  
+      const response = await axios.get(
+        `https://mehdb.vercel.app/deletescheme/${schemeId}`
+      );
+
       if (response.status === 200) {
         // Remove the deleted scheme from the local state
-        setSchemes((prevSchemes) => prevSchemes.filter((scheme) => scheme._id !== schemeId));
+        setSchemes((prevSchemes) =>
+          prevSchemes.filter((scheme) => scheme._id !== schemeId)
+        );
         console.log("Scheme deleted successfully!");
       } else {
         console.log("Failed to delete scheme.");
@@ -62,10 +107,15 @@ const SchemeList = () => {
       console.error("Error deleting scheme:", error.message);
     }
   };
-  
 
   return (
     <div className="">
+      <NavLink to="/addscheme" className="my-2 flex justify-end">
+        <Button className="mb-4">
+          <PlusCircle size={24} weight="duotone" />
+          <p>Add Scheme</p>
+        </Button>
+      </NavLink>
       {error && <p>Error: {error}</p>}
       <Table aria-label="Schemes table">
         <TableHeader>
