@@ -18,6 +18,8 @@ import UserProfile from "./components/UserProfile.jsx";
 import Demography from "./components/Demography.jsx";
 import AddSchemes from "./components/AddSchmes.jsx";
 import VisnagarMap from "./components/Maps/VisnagarMap.jsx";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,8 +40,10 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <Provider store={store}>
     <NextUIProvider>
       <RouterProvider router={router} />
     </NextUIProvider>
+    </Provider>
   </React.StrictMode>
 );
