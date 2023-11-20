@@ -21,7 +21,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:6969/login", {
+      const response = await axios.post("https://mehdb.vercel.app/login", {
         username: email,
         password,
       });
