@@ -13,6 +13,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/Logo";
+import { Toaster } from "react-hot-toast";
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -32,10 +33,6 @@ const RegisterPage = () => {
   };
 
   const handleRegister = async () => {
-    if (!validate()) {
-      return;
-    }
-
     try {
       const response = await axios.post(
         "https://mehdb.vercel.app/register",
@@ -54,23 +51,6 @@ const RegisterPage = () => {
     }
   };
 
-  const validate = () => {
-    let updatedErrors = {};
-    let isValid = true;
-
-    Object.keys(formData).forEach((field) => {
-      const value = formData[field];
-      updatedErrors[field] = validateField(field, value);
-      if (updatedErrors[field]) {
-        isValid = false;
-      }
-    });
-
-    setErrors(updatedErrors);
-
-    return isValid;
-  };
-
   const validateField = (field, value) => {
     let regex;
     switch (field) {
@@ -81,14 +61,12 @@ const RegisterPage = () => {
         regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(value) ? [] : ["Please enter a valid email address."];
       case "password":
-        // Password validation: at least 8 characters including one lowercase letter, one uppercase letter, one digit, and one special character
         regex =
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/;
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,16}$/;
         if (!value.trim()) {
           return ["Please enter your password."];
         } else {
           let errors = [];
-          // add blank line if there are multiple errors
           if (!/(?=.*[a-z])/.test(value)) {
             errors.push("At least one lowercase letter. ");
           }
@@ -117,6 +95,7 @@ const RegisterPage = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
+      <Toaster/>
       <Card className="w-96 p-4">
         <CardHeader className="text-center">
           <Logo />
