@@ -13,7 +13,7 @@ import {
 } from "@nextui-org/react";
 import axios from "axios";
 import { Pen, Trash, Eye } from "@phosphor-icons/react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { PlusCircle } from "@phosphor-icons/react";
 import {
   Modal,
@@ -43,66 +43,6 @@ const SchemeDetailsModal = ({ schemeDetails, isOpen, onClose }) => {
         <ModalFooter>
           <Button color="primary" onPress={onClose}>
             Close
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
-  );
-};
-
-const SchemeEditModal = ({ schemeDetails, isOpen, onClose, onEdit }) => {
-  const [editedScheme, setEditedScheme] = useState({ ...schemeDetails });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditedScheme((prevScheme) => ({ ...prevScheme, [name]: value }));
-  };
-
-  const handleSaveEdit = () => {
-    // Add logic to save edited scheme details
-    onEdit(editedScheme);
-    onClose();
-  };
-
-  return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">
-          Edit Scheme: {schemeDetails.schemename}
-        </ModalHeader>
-        <ModalBody>
-          <Input
-            label="Scheme Name"
-            name="schemename"
-            value={editedScheme.schemename}
-            onChange={handleInputChange}
-          />
-          <Input
-            label="Ministry"
-            name="ministry"
-            value={editedScheme.ministry}
-            onChange={handleInputChange}
-          />
-          <Input
-            label="Description"
-            name="desc"
-            value={editedScheme.desc}
-            onChange={handleInputChange}
-          />
-          <Input
-            label="Place"
-            name="place"
-            value={editedScheme.place}
-            onChange={handleInputChange}
-          />
-          {/* Add other input fields for editing scheme details */}
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onPress={handleSaveEdit}>
-            Save Changes
-          </Button>
-          <Button color="danger" variant="light" onPress={onClose}>
-            Cancel
           </Button>
         </ModalFooter>
       </ModalContent>
