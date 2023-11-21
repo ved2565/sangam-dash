@@ -11,7 +11,7 @@ import {
 } from "@nextui-org/react";
 import axios from "axios";
 import { Pen, Trash, Eye } from "@phosphor-icons/react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { PlusCircle } from "@phosphor-icons/react";
 
 const SchemeList = () => {
@@ -107,12 +107,12 @@ const SchemeList = () => {
 
   return (
     <div className="">
-      <NavLink to="/addscheme" className="my-2 flex justify-end">
-        <Button className="mb-4">
+      <div className="my-2 flex justify-end">
+        <Link to="/addscheme" className="mb-4 flex px-2 gap-2  bg-gray-200 py-2 rounded-xl">
           <PlusCircle size={24} weight="duotone" />
           <p>Add Scheme</p>
-        </Button>
-      </NavLink>
+        </Link>
+      </div>
       {error && <p>Error: {error}</p>}
       <Table aria-label="Schemes table">
         <TableHeader>
