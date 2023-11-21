@@ -8,10 +8,10 @@ import {
   Button,
   Chip,
 } from "@nextui-org/react";
-import { EyeSlashFilledIcon } from "./icons/EyeSlashFilledIcon";
-import { EyeFilledIcon } from "./icons/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "../icons/EyeSlashFilledIcon";
+import { EyeFilledIcon } from "../icons/EyeFilledIcon";
 import { useSelector } from "react-redux";
-import { selectAuthStatus, selectUserData } from "../store/authSelectors";
+import { selectAuthStatus, selectUserData } from "../../store/authSelectors";
 
 export default function UserProfile() {
   const userData = useSelector(selectUserData);

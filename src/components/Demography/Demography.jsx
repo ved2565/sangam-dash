@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "../index.css"; // You can create a separate CSS file for styles
+import "../../../src/index.css"; // You can create a separate CSS file for styles
 
 const PathWithText = ({ pathId, fillColor, textContent, to }) => {
   const [isHovered, setIsHovered] = useState(false);
