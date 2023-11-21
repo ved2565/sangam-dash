@@ -13,7 +13,7 @@ import {
 } from "@nextui-org/react";
 import axios from "axios";
 import { Pen, Trash, Eye } from "@phosphor-icons/react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { PlusCircle } from "@phosphor-icons/react";
 import {
   Modal,

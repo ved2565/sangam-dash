@@ -27,7 +27,7 @@ const Home = () => {
   //   }
   //   getAgePops();
   // }, []);
-
+ 
   return (
     <div className="mx-4">
       {/* <ImageGallery /> */}
@@ -37,7 +37,7 @@ const Home = () => {
           <PopulationChart />
         </div>
         <div className="w-full mx-4">
-          <Schemes />
+          <Schemes/>
         </div>
       </div>
     </div>

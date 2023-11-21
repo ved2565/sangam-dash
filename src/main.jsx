@@ -16,7 +16,7 @@ import RegisterPage from "./components/RegisterPage.jsx";
 import UploadCSV from "./components/UploadCSV.jsx";
 import UserProfile from "./components/UserProfile.jsx";
 import Demography from "./components/Demography.jsx";
-import AddSchemes from "./components/AddSchmes.jsx";
+import AddSchemes from "./components/AddSchemes.jsx";
 import VisnagarMap from "./components/Maps/VisnagarMap.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
@@ -37,12 +37,12 @@ const routes = createRoutesFromElements(
       <Route path="/upload" element={<UploadCSV />} />
       <Route path="/demography" element={<Demography />} />
       <Route path="/profile" element={<UserProfile />} />
-      <Route path="/addScheme" element={<AddSchemes />} />
       <Route path="/visnagar" element={<VisnagarMap />} />
+      <Route path="/addscheme" element={<AddSchemes />} />
+      <Route path="/register" element={<RegisterPage />} />
     </Route>
     ,
     <Route path="/login" element={<LoginPage />} />,
-    <Route path="/register" element={<RegisterPage />} />
   </>
 );
 
