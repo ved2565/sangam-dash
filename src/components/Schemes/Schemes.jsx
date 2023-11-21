@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-// ConsolidatedSchemeList.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
@@ -24,116 +22,53 @@ import {
 } from "@nextui-org/react";
 import { Eye, Pen, Trash } from "@phosphor-icons/react";
 
+const API_BASE_URL = "https://mehdb.vercel.app";
+
 const ConsolidatedSchemeList = () => {
   const [schemes, setSchemes] = useState([]);
   const [error, setError] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [editOpen, setEditOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedScheme, setSelectedScheme] = useState("");
+  const [modalData, setModalData] = useState({
+    isOpen: false,
+    schemeDetails: null,
+    editMode: false,
+    deleteMode: false,
+  });
   const [editedScheme, setEditedScheme] = useState({});
 
-  const SchemeDetailsModal = ({ schemeDetails, isOpen, onClose }) => {
-    if (!schemeDetails) {
-      return null;
+  const fetchSchemes = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/getscheme`);
+      if (response.status === 200) {
+        setSchemes(response.data || []);
+      } else {
+        setError("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+      setError("Internal server error");
     }
-    return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalContent>
-          <ModalHeader className="flex flex-col gap-1">
-            {schemeDetails.schemename}
-          </ModalHeader>
-          <ModalBody>
-            <p>{schemeDetails.desc}</p>
-            <p>Ministry: {schemeDetails.ministry}</p>
-            <p>Place: {schemeDetails.place}</p>
-            <p>Time of Scheme Added: {schemeDetails.timeOfschemeAdded}</p>
-            <p>Date: {schemeDetails.date}</p>
-            {/* Add other scheme details here */}
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onPress={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    );
-  };
-
-  const SchemeEditModal = ({ schemeDetails, isOpen, onClose }) => {
-    if (!schemeDetails) {
-      return null;
-    }
-    return (
-      <Modal isOpen={isOpen} onClose={handleCancelEdit}>
-        <ModalContent>
-          <ModalHeader>Edit Scheme</ModalHeader>
-          <ModalBody>
-            <Input
-              label="Scheme Name"
-              value={editedScheme.schemename}
-              onChange={(e) =>
-                setEditedScheme({ ...editedScheme, schemename: e.target.value })
-              }
-            />
-            <Input
-              label="Ministry"
-              value={editedScheme.ministry}
-              onChange={(e) =>
-                setEditedScheme({ ...editedScheme, ministry: e.target.value })
-              }
-            />
-            <Input
-              label="Description"
-              value={editedScheme.desc}
-              onChange={(e) =>
-                setEditedScheme({ ...editedScheme, desc: e.target.value })
-              }
-            />
-            <Input
-              label="Place"
-              value={editedScheme.place}
-              onChange={(e) =>
-                setEditedScheme({ ...editedScheme, place: e.target.value })
-              }
-            />
-            {/* Add other input fields for editing scheme details */}
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onPress={handleSaveEdit}>
-              Save Changes
-            </Button>
-            <Button color="danger" variant="light" onPress={handleCancelEdit}>
-              Cancel
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    );
   };
 
   const handleView = (schemeDetails) => {
-    console.log("View Scheme:", schemeDetails);
-    setSelectedScheme(schemeDetails);
-    setIsModalOpen(true);
+    setModalData({
+      isOpen: true,
+      schemeDetails,
+    });
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedScheme(null);
-  };
-
-  const handleEdit = (schemeId) => {
-    console.log("Edit Scheme:", schemeId);
-    setEditedScheme(schemeId);
-    setEditOpen(true);
+  const handleEdit = (schemeDetails) => {
+    setEditedScheme({ ...schemeDetails });
+    setModalData({
+      isOpen: true,
+      schemeDetails,
+      editMode: true,
+    });
   };
 
   const handleSaveEdit = async () => {
     try {
       const response = await axios.put(
-        `https://mehdb.vercel.app/updatescheme/${editedScheme._id}`,
+        `${API_BASE_URL}/updatescheme/${editedScheme._id}`,
         editedScheme
       );
 
@@ -143,7 +78,10 @@ const ConsolidatedSchemeList = () => {
             scheme._id === editedScheme._id ? editedScheme : scheme
           )
         );
-        setEditOpen(false);
+        setModalData({
+          ...modalData,
+          isOpen: false,
+        });
         console.log("Scheme edited successfully!");
       } else {
         console.log("Failed to edit scheme.");
@@ -153,33 +91,55 @@ const ConsolidatedSchemeList = () => {
     }
   };
 
-  const handleCancelEdit = () => {
-    setEditOpen(false);
+  const handleDelete = async (schemeDetails) => {
+    setEditedScheme({ ...schemeDetails });
+    setModalData({
+      isOpen: true,
+      schemeDetails,
+      deleteMode: true,
+    });
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!editedScheme._id) {
+      console.error("Invalid scheme ID for deletion");
+      return;
+    }
+
+    try {
+      const response = await axios.delete(
+        `${API_BASE_URL}/deletescheme/${editedScheme._id}`
+      );
+
+      if (response.status === 200) {
+        setSchemes((prevSchemes) =>
+          prevSchemes.filter((scheme) => scheme._id !== editedScheme._id)
+        );
+        setModalData({
+          ...modalData,
+          isOpen: false,
+        });
+        console.log("Scheme deleted successfully!");
+      } else {
+        console.log("Failed to delete scheme.");
+      }
+    } catch (error) {
+      console.error("Error deleting scheme:", error.message);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setModalData({
+      isOpen: false,
+      schemeDetails: null,
+      editMode: false,
+      deleteMode: false,
+    });
     setEditedScheme({});
   };
 
-  const handleDelete = (schemeId) => {
-    console.log("Delete Scheme:", schemeId);
-    // Add your delete logic here
-  };
-
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("https://mehdb.vercel.app/getscheme");
-
-        if (response.status === 200) {
-          setSchemes(response.data || []);
-        } else {
-          setError("Failed to fetch data");
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error.message);
-        setError("Internal server error");
-      }
-    };
-
-    fetchData();
+    fetchSchemes();
   }, []);
 
   return (
@@ -220,7 +180,7 @@ const ConsolidatedSchemeList = () => {
                   </Tooltip>
                   <Tooltip content="Delete Scheme">
                     <Chip
-                      onClick={() => handleDelete(scheme._id)}
+                      onClick={() => handleDelete(scheme)}
                       color="danger"
                     >
                       <Trash size={20} weight="duotone" />
@@ -232,17 +192,97 @@ const ConsolidatedSchemeList = () => {
           ))}
         </TableBody>
       </Table>
-      <SchemeDetailsModal
-        schemeDetails={selectedScheme}
-        isOpen={isModalOpen}
+      <SchemeModal
+        modalData={modalData}
+        editedScheme={editedScheme}
+        onEdit={handleSaveEdit}
+        onDelete={handleConfirmDelete}
         onClose={handleCloseModal}
-      />
-      <SchemeEditModal
-        schemeDetails={editedScheme}
-        isOpen={editOpen}
-        onClose={handleCloseModal}
+        onInputChange={(field, value) =>
+          setEditedScheme({ ...editedScheme, [field]: value })
+        }
       />
     </div>
+  );
+};
+
+const SchemeModal = ({
+  modalData,
+  editedScheme,
+  onEdit,
+  onDelete,
+  onClose,
+  onInputChange,
+}) => {
+  const { isOpen, schemeDetails, editMode, deleteMode } = modalData;
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalContent>
+        {editMode && (
+          <ModalHeader>Edit Scheme: {editedScheme.schemename}</ModalHeader>
+        )}
+        {deleteMode && <ModalHeader>Delete Scheme</ModalHeader>}
+        <ModalBody>
+          {schemeDetails && (
+            <>
+              <p>{schemeDetails.desc}</p>
+              <p>Ministry: {schemeDetails.ministry}</p>
+              <p>Place: {schemeDetails.place}</p>
+              <p>Time of Scheme Added: {schemeDetails.timeOfschemeAdded}</p>
+              <p>Date: {schemeDetails.date}</p>
+            </>
+          )}
+          {editMode && (
+            <>
+              <Input
+                label="Scheme Name"
+                value={editedScheme.schemename}
+                onChange={(e) => onInputChange("schemename", e.target.value)}
+              />
+              <Input
+                label="Ministry"
+                value={editedScheme.ministry}
+                onChange={(e) => onInputChange("ministry", e.target.value)}
+              />
+              <Input
+                label="Description"
+                value={editedScheme.desc}
+                onChange={(e) => onInputChange("desc", e.target.value)}
+              />
+              <Input
+                label="Place"
+                value={editedScheme.place}
+                onChange={(e) => onInputChange("place", e.target.value)}
+              />
+              {/* Add other input fields for editing scheme details */}
+            </>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          {editMode && (
+            <>
+              <Button color="primary" onPress={onEdit}>
+                Save Changes
+              </Button>
+              <Button color="danger" variant="light" onPress={onClose}>
+                Cancel
+              </Button>
+            </>
+          )}
+          {deleteMode && (
+            <>
+              <Button color="primary" onPress={onDelete}>
+                Confirm Delete
+              </Button>
+              <Button color="danger" variant="light" onPress={onClose}>
+                Cancel
+              </Button>
+            </>
+          )}
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 
