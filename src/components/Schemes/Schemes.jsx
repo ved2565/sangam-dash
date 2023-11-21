@@ -50,6 +50,7 @@ const ConsolidatedSchemeList = () => {
   };
 
   const handleView = (schemeDetails) => {
+    console.log("View Scheme:", schemeDetails);
     setModalData({
       isOpen: true,
       schemeDetails,
@@ -57,6 +58,7 @@ const ConsolidatedSchemeList = () => {
   };
 
   const handleEdit = (schemeDetails) => {
+    console.log("Edit Scheme:", schemeDetails);
     setEditedScheme({ ...schemeDetails });
     setModalData({
       isOpen: true,
@@ -91,7 +93,8 @@ const ConsolidatedSchemeList = () => {
     }
   };
 
-  const handleDelete = async (schemeDetails) => {
+  const handleDelete = (schemeDetails) => {
+    console.log("Delete Scheme:", schemeDetails);
     setEditedScheme({ ...schemeDetails });
     setModalData({
       isOpen: true,
@@ -101,6 +104,8 @@ const ConsolidatedSchemeList = () => {
   };
 
   const handleConfirmDelete = async () => {
+    console.log("Confirm Delete Scheme:", editedScheme);
+
     if (!editedScheme._id) {
       console.error("Invalid scheme ID for deletion");
       return;
@@ -129,6 +134,7 @@ const ConsolidatedSchemeList = () => {
   };
 
   const handleCloseModal = () => {
+    console.log("Close Modal");
     setModalData({
       isOpen: false,
       schemeDetails: null,
@@ -139,6 +145,7 @@ const ConsolidatedSchemeList = () => {
   };
 
   useEffect(() => {
+    console.log("Fetch Schemes");
     fetchSchemes();
   }, []);
 
@@ -179,10 +186,7 @@ const ConsolidatedSchemeList = () => {
                     </Chip>
                   </Tooltip>
                   <Tooltip content="Delete Scheme">
-                    <Chip
-                      onClick={() => handleDelete(scheme)}
-                      color="danger"
-                    >
+                    <Chip onClick={() => handleDelete(scheme)} color="danger">
                       <Trash size={20} weight="duotone" />
                     </Chip>
                   </Tooltip>
