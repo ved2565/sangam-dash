@@ -20,7 +20,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "@nextui-org/react";
-import { Eye, Pen, Trash } from "@phosphor-icons/react";
+import { Eye, Pen, PlusCircle, Trash } from "@phosphor-icons/react";
+import { NavLink } from "react-router-dom";
 
 const API_BASE_URL = "https://mehdb.vercel.app";
 
@@ -151,6 +152,16 @@ const ConsolidatedSchemeList = () => {
 
   return (
     <div className="border rounded-lg border-gray-600">
+      <NavLink to="/addscheme" className="m-2 flex justify-end">
+        <Chip
+          variant="bordered"
+          size="lg"
+          color="primary"
+          avatar={<PlusCircle size={20} weight="duotone" />}
+        >
+          <p>Add Scheme</p>
+        </Chip>
+      </NavLink>
       {error && <p>Error: {error}</p>}
       <Table border="primary" aria-label="Scheme Table">
         <TableHeader>
