@@ -7,46 +7,46 @@ import {
   Divider,
   Input,
   Button,
+  Chip,
 } from "@nextui-org/react";
 import axios from "axios";
 import Logo from "../assets/Logo";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
-import { useNavigate } from "react-router-dom";
-// Import toast from react-hot-toast
+import { NavLink, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+
+// Create an Axios instance with a base URL
+const api = axios.create({
+  baseURL: "https://mehdb.vercel.app/",
+});
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("https://mehdb.vercel.app/login", {
+      const response = await api.post("login", {
         username: email,
         password,
       });
 
       if (response.status === 200) {
-        // Dispatch the login action with user data
         dispatch(login({ userData: response.data }));
-        // Show success toast
         toast.success("Login successful");
         navigate("/");
       } else {
-        // Show error toast
         toast.error("Login failed");
       }
     } catch (error) {
       console.error("Error:", error);
+
       if (error.response && error.response.status === 401) {
-        // Show error toast for invalid credentials
         toast.error("Invalid credentials");
       } else {
-        // Show error toast for other errors
         toast.error(`Error: ${error.message}`);
       }
     }
@@ -57,7 +57,6 @@ const LoginPage = () => {
       <Card className="w-96">
         <CardHeader className="flex items-center justify-center gap-3">
           <Logo />
-          <h2 className="text-xl font-bold">Login</h2>
         </CardHeader>
         <Divider />
         <CardBody>
@@ -68,6 +67,7 @@ const LoginPage = () => {
               label="Email"
               className="my-2"
               value={email}
+              variant="bordered"
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
@@ -76,13 +76,14 @@ const LoginPage = () => {
               label="Password"
               className="my-2"
               value={password}
+              variant="bordered"
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type="button"
               onClick={handleLogin}
-              className="btn-primary my-4"
               aria-label="Login"
+              className="btn-primary w-full mt-4"
             >
               Login
             </Button>
@@ -90,11 +91,17 @@ const LoginPage = () => {
         </CardBody>
         <Divider />
         <CardFooter>
-          <div className={message ? "text-green-500" : "text-red-500"}>
-            {message && <p>{message}</p>}
+          <div className="text-justify">
+            <span>Don&apos;t have an account?</span>{" "}
+            <span>
+              <Chip>
+                <NavLink to="/Register" className="">
+                  Register
+                </NavLink>
+              </Chip>
+            </span>
           </div>
         </CardFooter>
-        {/* Add the Toaster component at the end of the card */}
         <Toaster position="top-center" reverseOrder={false} />
       </Card>
     </div>
