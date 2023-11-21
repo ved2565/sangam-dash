@@ -39,10 +39,10 @@ const routes = createRoutesFromElements(
       <Route path="/profile" element={<UserProfile />} />
       <Route path="/visnagar" element={<VisnagarMap />} />
       <Route path="/addscheme" element={<AddSchemes />} />
+      <Route path="/register" element={<RegisterPage />} />
     </Route>
     ,
     <Route path="/login" element={<LoginPage />} />,
-    <Route path="/register" element={<RegisterPage />} />
   </>
 );
 
