@@ -12,10 +12,10 @@ import {
 import axios from "axios";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
-import Logo from "../assets/Logo";
+import Logo from "../../assets/Logo";
 import { Toaster } from "react-hot-toast";
 import {useSelector} from "react-redux";
-import {selectAuthStatus, selectUserData} from "../store/authSelectors"
+import {selectAuthStatus, selectUserData} from "../../store/authSelectors"
 
 const RegisterPage = () => {
   const authStatus = useSelector(selectAuthStatus);

@@ -9,18 +9,18 @@ import {
   Route,
 } from "react-router-dom";
 import { NextUIProvider } from "@nextui-org/react";
-import Home from "./components/Home.jsx";
-import Population from "./components/Population.jsx";
-import LoginPage from "./components/LoginPage.jsx";
-import RegisterPage from "./components/RegisterPage.jsx";
-import UploadCSV from "./components/UploadCSV.jsx";
-import UserProfile from "./components/UserProfile.jsx";
-import Demography from "./components/Demography.jsx";
-import AddSchemes from "./components/AddSchemes.jsx";
-import VisnagarMap from "./components/Maps/VisnagarMap.jsx";
+import Home from "./components/Home/Home.jsx";
+import Population from "./components/Population/Population.jsx";
+import LoginPage from "./components/Auth/LoginPage.jsx";
+import RegisterPage from "./components/Auth/RegisterPage.jsx";
+import UploadCSV from "./components/Utils/UploadCSV.jsx";
+import UserProfile from "./components/Auth/UserProfile.jsx";
+import Demography from "./components/Demography/Demography.jsx";
+import AddSchemes from "./components/Schemes/AddSchemes.jsx";
+import VisnagarMap from "./components/Demography/Maps/VisnagarMap.jsx";
+import AuthLayout from "./components/Utils/AuthLayout.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
-import AuthLayout from "./components/AuthLayout.jsx";
 
 const routes = createRoutesFromElements(
   <>

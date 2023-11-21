@@ -8,7 +8,7 @@ import {
   Button,
   Textarea,
 } from "@nextui-org/react";
-import Logo from "../assets/Logo";
+import Logo from "../../assets/Logo";
 import Papa from "papaparse";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
