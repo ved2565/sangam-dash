@@ -8,8 +8,8 @@ import {
   Link,
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
-import { EyeSlashFilledIcon } from "./icons/EyeSlashFilledIcon";
-import { EyeFilledIcon } from "./icons/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "../icons/EyeSlashFilledIcon";
+import { EyeFilledIcon } from "../icons/EyeFilledIcon";
 
 export default function UserProfile() {
   const data = {

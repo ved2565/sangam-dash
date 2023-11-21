@@ -10,7 +10,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/react";
-import Logo from "../assets/Logo";
+import Logo from "../../assets/Logo";
 import { NavLink } from "react-router-dom";
 
 export default function App() {

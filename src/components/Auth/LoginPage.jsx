@@ -10,9 +10,9 @@ import {
   Chip,
 } from "@nextui-org/react";
 import axios from "axios";
-import Logo from "../assets/Logo";
+import Logo from "../../assets/Logo";
 import { useDispatch } from "react-redux";
-import { login } from "../store/authSlice";
+import { login } from "../../store/authSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
