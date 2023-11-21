@@ -16,7 +16,6 @@ import { login } from "../store/authSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
-// Create an Axios instance with a base URL
 const api = axios.create({
   baseURL: "https://mehdb.vercel.app/",
 });
