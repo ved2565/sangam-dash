@@ -104,7 +104,7 @@ const ConsolidatedSchemeList = () => {
   };
 
   const handleConfirmDelete = async () => {
-    console.log("Confirm Delete Scheme:", editedScheme);
+    console.log("Confirm Delete Scheme:", editedScheme._id);
 
     if (!editedScheme._id) {
       console.error("Invalid scheme ID for deletion");
@@ -112,7 +112,7 @@ const ConsolidatedSchemeList = () => {
     }
 
     try {
-      const response = await axios.delete(
+      const response = await axios.get(
         `${API_BASE_URL}/deletescheme/${editedScheme._id}`
       );
 
