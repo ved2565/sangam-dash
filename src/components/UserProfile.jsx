@@ -6,6 +6,7 @@ import {
   Divider,
   Input,
   Button,
+  Chip,
 } from "@nextui-org/react";
 import { EyeSlashFilledIcon } from "./icons/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "./icons/EyeFilledIcon";
@@ -80,7 +81,7 @@ export default function UserProfile() {
             </div>
           </div>
           <div className="mt-6">
-            <Button variant="success">Save Changes</Button>
+            <Chip variant="success">Save Changes</Chip>
           </div>
         </CardBody>
       </Card>
