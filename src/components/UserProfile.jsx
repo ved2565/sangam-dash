@@ -1,106 +1,88 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Divider,
-  Link,
+  Input,
+  Button,
 } from "@nextui-org/react";
-import { Input } from "@nextui-org/react";
 import { EyeSlashFilledIcon } from "./icons/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "./icons/EyeFilledIcon";
+import { useSelector } from "react-redux";
+import { selectAuthStatus, selectUserData } from "../store/authSelectors";
 
 export default function UserProfile() {
-  const data = {
-    "First Name": "First ",
-    "Last Name": "Last",
-    Username: "@name",
-    Email: "123@email.com",
-    Role: "hod",
-  };
-  const [isVisible, setIsVisible] = React.useState(false);
+  const userData = useSelector(selectUserData);
+  const authStatus = useSelector(selectAuthStatus);
 
-  const toggleVisibility = () => setIsVisible(!isVisible);
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleVisibility = () => setIsVisible((v) => !v);
+
   return (
     <div className="flex justify-center">
-      <Card className=" max-w-[400px] md:min-w-[800px]">
-        <CardHeader className="flex justify-around gap-3">
-          {/* <Logo />
-          <div className="flex flex-col">
-            <p className="text-md">First Last</p>
-            <p className="text-small text-default-500">@username</p>
-          </div> */}
+      <Card className="w-full max-w-md p-4">
+        <CardHeader>
+          <h2 className="text-2xl font-bold">User Profile</h2>
         </CardHeader>
         <Divider />
         <CardBody>
-          <div className="flex flex-col justify-center">
-            <Input
-              isRequired
-              type="text"
-              label="First Name"
-              defaultValue={data["First Name"]}
-              className="max-w-xs m-2"
-            />
-            <Input
-              isRequired
-              type="text"
-              label="Last Name"
-              defaultValue={data["Last Name"]}
-              className="max-w-xs m-2"
-            />
-            <Input
-              isRequired
-              type="text"
-              label="Username"
-              defaultValue={data["Username"]}
-              className="max-w-xs m-2"
-            />
-            <Input
-              label="Password"
-              variant="bordered"
-              placeholder="Enter your password"
-              endContent={
-                <button
-                  className="focus:outline-none"
-                  type="button"
-                  onClick={toggleVisibility}
-                >
-                  {isVisible ? (
-                    <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                  ) : (
-                    <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                  )}
-                </button>
-              }
-              type={isVisible ? "text" : "password"}
-              className="max-w-xs"
-            />
-            <Input
-              isRequired
-              type="email"
-              label="Email"
-              defaultValue={data["Email"]}
-              className="max-w-xs m-2"
-            />
-            <Input
-              isRequired
-              type="text"
-              label="Role"
-              defaultValue={data["Role"]}
-              className="max-w-xs m-2"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Input
+                label="First Name"
+                defaultValue={userData.fname}
+                className="mb-4"
+                variant="bordered"
+              />
+              <Input
+                label="Last Name"
+                defaultValue={userData.lname}
+                className="mb-4"
+                variant="bordered"
+              />
+              <Input
+                label="Username"
+                defaultValue={userData.username}
+                className="mb-4"
+                variant="bordered"
+              />
+              <Input
+                label="Password"
+                variant="bordered"
+                type={isVisible ? "text" : "password"}
+                endContent={
+                  <Button
+                    variant="ghost"
+                    onClick={toggleVisibility}
+                    icon={
+                      isVisible ? <EyeSlashFilledIcon /> : <EyeFilledIcon />
+                    }
+                  />
+                }
+                className="mb-4"
+              />
+            </div>
+            <div>
+              <Input
+                label="Email"
+                type="email"
+                defaultValue={userData.email}
+                className="mb-4"
+                variant="bordered"
+              />
+              <Input
+                label="Role"
+                defaultValue={userData.role}
+                className="mb-4"
+                variant="bordered"
+              />
+            </div>
+          </div>
+          <div className="mt-6">
+            <Button variant="success">Save Changes</Button>
           </div>
         </CardBody>
-        <Divider />
-        <CardFooter>
-          <Link
-            isExternal
-            href="https://github.com/nextui-org/nextui"
-          >
-            {/* Visit source code on GitHub. */}
-          </Link>
-        </CardFooter>
       </Card>
     </div>
   );
