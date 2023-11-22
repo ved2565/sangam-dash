@@ -1,8 +1,7 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
 import Lenis from "@studio-freight/lenis";
 // import ImageGallery from "./ImageGallery";
 import DetailsBar from "./DetailsBar";
-import PopulationChart from "../Population/PopulationChart";
 import Schemes from "../Schemes/Schemes";
 
 const lenis = new Lenis();
@@ -19,15 +18,6 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 const Home = () => {
-  // const [agePops, setAgePops] = useState([]);
-  // useEffect(() => {
-  //   const getAgePops = async () => {
-  //     const res = await axios.get("http://localhost:5000/agepops");
-  //     setAgePops(res.data);
-  //   }
-  //   getAgePops();
-  // }, []);
-
   return (
     <div className="">
       {/* <ImageGallery /> */}
