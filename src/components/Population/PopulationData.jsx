@@ -1,20 +1,40 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const PopulationData = () => {
   const [agePops, setAgePops] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAgePops = async () => {
-      const res = await axios.get("https://mehdb.vercel.app/agepops", {
-        withCredentials: true,
-      });
-      // const res = await axios.get("http://localhost:6969/agepops");
-      const sortedData = res.data.sort((a, b) => a.Sr.No - b.Sr.No); // Sorting the data by Sr.No
-      setAgePops(sortedData);
+      try {
+        const res = await axios.get("https://mehdb.vercel.app/agepops", {
+          withCredentials: true,
+        });
+        console.log("okay")
+        console.log(res.data.agePops);
+
+        if (res.status !== 200) {
+          navigate("/login");
+          const error = new Error(res.error);
+          throw error;
+        }
+        const sortedData = res.data.agePops.sort((a, b) => a.Sr.No - b.Sr.No);
+        setAgePops(sortedData);
+        console.log(agePops); // Update state with the received data
+      } catch (err) {
+        navigate("/login");
+        console.log(err);
+      }
+      // Handle other errors, e.g., network issues
     };
+
     getAgePops();
-  }, []);
+  }, [navigate]); // Add navigate as a dependency to useEffect
+ // Add navigate as a dependency to useEffect
+
+  console.log(agePops);
 
   const labels = agePops
     .map((agePop, index) =>
