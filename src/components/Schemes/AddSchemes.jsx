@@ -39,7 +39,7 @@ const AddSchemes = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <Card className="w-96">
+      <Card className="w-96 border border-black ">
         <CardHeader className="flex gap-3">
           <div className="text-xl font-bold">Add Scheme</div>
         </CardHeader>

@@ -35,7 +35,7 @@ export default function UserProfile() {
   }, [navigate]);
   return (
     <div className="flex justify-center">
-      <Card className="w-full max-w-md p-4">
+      <Card className="w-full max-w-md p-4 border border-black">
         <CardHeader>
           <h2 className="text-2xl font-bold">User Profile</h2>
         </CardHeader>

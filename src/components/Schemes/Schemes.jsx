@@ -162,7 +162,7 @@ const ConsolidatedSchemeList = () => {
           <p>Add Scheme</p>
         </Chip>
       </NavLink>
-      {error && <p>Error: {error}</p>}
+      {error && <Chip variant="dot" color="danger" className="flex mx-auto text-red-700 text-medium font-mono">Error: {error}</Chip>}
       <Table border="primary" aria-label="Scheme Table">
         <TableHeader>
           <TableColumn>Sr. No.</TableColumn>

@@ -74,7 +74,7 @@ const PopulationChart = () => {
 
   return (
     <div>
-      <Card className="w-full mx-4">
+      <Card className="w-full mx-4 border border-black">
         <CardBody>
           <Bar
             data={chartData}
