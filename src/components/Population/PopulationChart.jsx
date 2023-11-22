@@ -33,8 +33,8 @@ const PopulationChart = () => {
     datasets: [
       {
         label: "Population",
-        backgroundColor: "rgb(255, 99, 132)",
-        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "#e28413",
+        borderColor: "#e28413",
         data: data,
       },
     ],
