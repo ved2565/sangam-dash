@@ -27,17 +27,16 @@ const Home = () => {
   //   }
   //   getAgePops();
   // }, []);
- 
+
   return (
-    <div className="mx-4">
+    <div className="">
       {/* <ImageGallery /> */}
-      <DetailsBar />
-      <div className="flex justify-between gap-2">
-        <div className="w-1/3 mx-4">
-          <PopulationChart />
-        </div>
-        <div className="w-full mx-4">
-          <Schemes/>
+      <div className="main-data">
+        <DetailsBar />
+        <div className="flex justify-between gap-2">
+          <div className="w-full">
+            <Schemes />
+          </div>
         </div>
       </div>
     </div>

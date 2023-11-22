@@ -1,10 +1,10 @@
+/* eslint-disable react/no-unknown-property */
 import { Card, CardBody } from "@nextui-org/card";
-import React from "react";
 
 const VisnagarMap = () => {
   return (
     <div className="w-ful my-2 flex gap-2 justify-evenly">
-      <Card>
+      <Card className="border border-black">
         <CardBody>
           <svg
             width="327"

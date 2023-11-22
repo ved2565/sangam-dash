@@ -76,7 +76,7 @@ export default function UploadCSV() {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <Card className="min-w-[400px]">
+      <Card className="min-w-[400px] border border-black">
         <CardHeader className="flex gap-3">
           <Logo />
         </CardHeader>
