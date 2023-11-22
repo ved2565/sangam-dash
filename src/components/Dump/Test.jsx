@@ -21,11 +21,13 @@ import {
   ModalFooter,
 } from "@nextui-org/react";
 import { Eye, Pen, PlusCircle, Trash } from "@phosphor-icons/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 
 const API_BASE_URL = "https://mehdb.vercel.app";
 
 const ConsolidatedSchemeList = () => {
+  const navigate = useNavigate();
   const [schemes, setSchemes] = useState([]);
   const [error, setError] = useState(null);
   const [modalData, setModalData] = useState({
@@ -38,15 +40,22 @@ const ConsolidatedSchemeList = () => {
 
   const fetchSchemes = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/getschemes`);
-      if (response.status === 200) {
-        setSchemes(response.data || []);
-      } else {
-        setError("Failed to fetch data");
+      const res = await axios.get(`${API_BASE_URL}/getschemes`, {
+        withCredentials: true,
+      });
+
+      console.log(res.data);
+      if (res.status !== 200) {
+        navigate("/login");
+        const error = new Error(res.error);
+        throw error;
       }
+      setSchemes(res.data);
+      console.log("Schemes:", schemes);
     } catch (error) {
-      console.error("Error fetching data:", error.message);
-      setError("Internal server error");
+      // navigate("/login")
+      setError(error.message);
+      console.error(error);
     }
   };
 
@@ -70,27 +79,40 @@ const ConsolidatedSchemeList = () => {
 
   const handleSaveEdit = async () => {
     try {
-      const response = await axios.put(
+      const res = await axios.put(
         `${API_BASE_URL}/updatescheme/${editedScheme._id}`,
-        editedScheme
+        editedScheme,
+        {
+          withCredentials: true,
+        }
       );
 
-      if (response.status === 200) {
-        setSchemes((prevSchemes) =>
-          prevSchemes.map((scheme) =>
-            scheme._id === editedScheme._id ? editedScheme : scheme
-          )
-        );
-        setModalData({
-          ...modalData,
-          isOpen: false,
-        });
-        console.log("Scheme edited successfully!");
-      } else {
-        console.log("Failed to edit scheme.");
+      console.log(res.data);
+
+      if (res.status !== 200) {
+        const error = new Error(res.error);
+        throw error;
       }
+
+      setSchemes((prevSchemes) =>
+        prevSchemes.map((scheme) =>
+          scheme._id === editedScheme._id ? editedScheme : scheme
+        )
+      );
+
+      setModalData({
+        ...modalData,
+        isOpen: false,
+      });
+
+      // Use react-hot-toast's promise property to handle toast after it is dismissed
+      const successToast = toast.success("Scheme edited successfully!");
+      await successToast.promise;
+
+      // Now you can navigate after the toast is dismissed
     } catch (error) {
-      console.error("Error editing scheme:", error.message);
+      toast.error("Error editing scheme!");
+      navigate("/login");
     }
   };
 
@@ -114,7 +136,11 @@ const ConsolidatedSchemeList = () => {
 
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/deletescheme/${editedScheme._id}`
+        `${API_BASE_URL}/deletescheme/${editedScheme._id}`,
+        editedScheme,
+        {
+          withCredentials: true,
+        }
       );
 
       if (response.status === 200) {
@@ -125,12 +151,13 @@ const ConsolidatedSchemeList = () => {
           ...modalData,
           isOpen: false,
         });
-        console.log("Scheme deleted successfully!");
+        const successToast = toast.success("Scheme deleted successfully!");
+        await successToast.promise;
       } else {
-        console.log("Failed to delete scheme.");
+        toast.error("Failed to delete scheme.");
       }
     } catch (error) {
-      console.error("Error deleting scheme:", error.message);
+      toast.error("Error deleting scheme:", error.message);
     }
   };
 
@@ -152,6 +179,9 @@ const ConsolidatedSchemeList = () => {
 
   return (
     <div className="border rounded-lg border-gray-600">
+      <div>
+        <Toaster />
+      </div>
       <Chip
         className=" my-2 flex mx-auto text-medium font-mono"
         variant="bordered"
@@ -191,8 +221,8 @@ const ConsolidatedSchemeList = () => {
               <TableCell>{scheme.ministry}</TableCell>
               <TableCell>{scheme.desc}</TableCell>
               <TableCell>{scheme.place}</TableCell>
-              <TableCell>{scheme.timeOfschemeAdded}</TableCell>
-              <TableCell>{scheme.date}</TableCell>
+              <TableCell>{scheme.moneygranted}</TableCell>
+              <TableCell>{scheme.moneyspent}</TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">
                   <Tooltip content="View Scheme">
