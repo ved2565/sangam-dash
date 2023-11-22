@@ -18,6 +18,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const api = axios.create({
   baseURL: "https://mehdb.vercel.app/",
+  // baseURL: "http://localhost:6969/",
 });
 
 const LoginPage = () => {
@@ -31,6 +32,8 @@ const LoginPage = () => {
       const response = await api.post("login", {
         username: email,
         password,
+      }, {
+        withCredentials: true,
       });
 
       if (response.status === 200) {

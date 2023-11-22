@@ -6,7 +6,8 @@ const PopulationData = () => {
 
   useEffect(() => {
     const getAgePops = async () => {
-      const res = await axios.get("https://mehdb.vercel.app/agepops");
+      // const res = await axios.get("https://mehdb.vercel.app/agepops");
+      const res = await axios.get("http://localhost:6969/agepops");
       const sortedData = res.data.sort((a, b) => a.Sr.No - b.Sr.No); // Sorting the data by Sr.No
       setAgePops(sortedData);
     };
