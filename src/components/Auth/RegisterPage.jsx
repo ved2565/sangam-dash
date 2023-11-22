@@ -106,7 +106,7 @@ const RegisterPage = () => {
   return (authStatus && data.role === "ADMIN")?(
     <div className="flex justify-center items-center min-h-screen">
       <Toaster/>
-      <Card className="w-96 p-4">
+      <Card className="w-96 p-4 border border-black">
         <CardHeader className="text-center">
           <Logo />
         </CardHeader>

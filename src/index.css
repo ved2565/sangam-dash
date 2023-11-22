@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  margin: 1rem;
+}
 
 ::-webkit-scrollbar {
   width: 5px;
@@ -27,4 +30,9 @@ text{
   color: black;
   font-size: 3rem;
   font-family: monospace;
+}
+
+.data{
+  display: flex;
+  flex-direction: column;
 }

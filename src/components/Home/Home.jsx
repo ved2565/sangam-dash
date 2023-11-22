@@ -29,14 +29,14 @@ const Home = () => {
   // }, []);
  
   return (
-    <div className="mx-4">
+    <div className="">
       {/* <ImageGallery /> */}
       <DetailsBar />
-      <div className="flex justify-between gap-2">
-        <div className="w-1/3 mx-4">
+      <div className="flex justify-between gap-2 data">
+        {/* <div className="w-1/3 mx-4">
           <PopulationChart />
-        </div>
-        <div className="w-full mx-4">
+        </div> */}
+        <div className="w-full">
           <Schemes/>
         </div>
       </div>
