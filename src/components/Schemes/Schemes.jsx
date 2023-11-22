@@ -152,17 +152,26 @@ const ConsolidatedSchemeList = () => {
 
   return (
     <div className="border rounded-lg border-gray-600">
-      <NavLink to="/addscheme" className="m-2 flex justify-end">
-        <Chip
-          variant="bordered"
-          size="lg"
-          color="primary"
-          avatar={<PlusCircle size={20} weight="duotone" />}
-        >
+      <Chip
+        className="mx-auto my-2 flex justify-end"
+        variant="bordered"
+        size="lg"
+        color="primary"
+        avatar={<PlusCircle size={20} weight="duotone" />}
+      >
+        <NavLink to="/addscheme" className="">
           <p>Add Scheme</p>
+        </NavLink>
+      </Chip>
+      {error && (
+        <Chip
+          variant="dot"
+          color="danger"
+          className="my-2 flex mx-auto text-red-700 text-medium font-mono"
+        >
+          Error: {error}
         </Chip>
-      </NavLink>
-      {error && <Chip variant="dot" color="danger" className="flex mx-auto text-red-700 text-medium font-mono">Error: {error}</Chip>}
+      )}
       <Table border="primary" aria-label="Scheme Table">
         <TableHeader>
           <TableColumn>Sr. No.</TableColumn>
