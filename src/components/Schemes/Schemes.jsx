@@ -153,7 +153,7 @@ const ConsolidatedSchemeList = () => {
   return (
     <div className="border rounded-lg border-gray-600">
       <Chip
-        className="mx-auto my-2 flex justify-end"
+        className=" my-2 flex mx-auto text-medium font-mono"
         variant="bordered"
         size="lg"
         color="primary"
