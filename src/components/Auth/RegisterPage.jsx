@@ -14,17 +14,8 @@ import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/Logo";
 import { Toaster } from "react-hot-toast";
-import {useSelector} from "react-redux";
-import {selectAuthStatus, selectUserData} from "../../store/authSelectors"
 
 const RegisterPage = () => {
-  const authStatus = useSelector(selectAuthStatus);
-  const userData = useSelector(selectUserData);
-  const data = {
-    username: userData.username,
-    email: userData.email,
-    role: "ADMIN",
-  }
 
   const [formData, setFormData] = useState({
     username: "",
@@ -103,7 +94,7 @@ const RegisterPage = () => {
     }
   };
 
-  return (authStatus && data.role === "ADMIN")?(
+  return (
     <div className="flex justify-center items-center min-h-screen">
       <Toaster/>
       <Card className="w-96 p-4 border border-black">
@@ -155,22 +146,7 @@ const RegisterPage = () => {
         </CardFooter>
       </Card>
     </div>
-  ):(
-    <div className="flex justify-center items-center min-h-screen">
-      <Card className="w-96">
-        <CardHeader className="flex gap-3 justify-center">
-          <h2>Register</h2>
-        </CardHeader>
-        <Divider />
-        <CardBody>
-          <div className="text-red-500">
-            <p>You are not authorized to view this page.</p>
-          </div>
-        </CardBody>
-      </Card>
-    </div>
   );
-;
 };
 
 export default RegisterPage;
