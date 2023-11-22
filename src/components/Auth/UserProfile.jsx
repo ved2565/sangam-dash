@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -8,18 +8,43 @@ import {
   Button,
   Chip,
 } from "@nextui-org/react";
+import axios from "axios";
 import { EyeSlashFilledIcon } from "../icons/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "../icons/EyeFilledIcon";
-import { useSelector } from "react-redux";
-import { selectAuthStatus, selectUserData } from "../../store/authSelectors";
+import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {
-  const userData = useSelector(selectUserData);
-  const authStatus = useSelector(selectAuthStatus);
-
+  const navigate = useNavigate();
+  const [data, setData] = useState(null); // Initialize state with null or an appropriate default value
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible((v) => !v);
+  useEffect(() => {
+    const callTemp = async () => {
+      try {
+        const res = await axios.get("https://mehdb.vercel.app/temp", {
+          // const res = await axios.get("http://localhost:6969/temp", {
+          withCredentials: true,
+        });
 
+        console.log(res.data);
+
+        if (res.status !== 200) {
+          navigate("/login");
+          const error = new Error(res.error);
+          throw error;
+        }
+
+        setData(res.data); // Update state with the received data
+        console.log("Data in state:", data); // Log the data in the state
+      } catch (err) {
+        navigate("/login");
+        console.log(err);
+      }
+    };
+
+    // Call the function when the component mounts
+    callTemp();
+  }, [navigate]);
   return (
     <div className="flex justify-center">
       <Card className="w-full max-w-md p-4">
@@ -30,58 +55,42 @@ export default function UserProfile() {
         <CardBody>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Input
+              {/* {data && <div>Username: {data.user.firstName}</div>} */}
+              {data && <Input
                 label="First Name"
-                defaultValue={userData.fname}
+                defaultValue={ data.user.firstName}
                 className="mb-4"
                 variant="bordered"
-              />
-              <Input
+                readOnly
+              />}
+              {data && <Input
                 label="Last Name"
-                defaultValue={userData.lname}
+                defaultValue={data.user.lastName}
                 className="mb-4"
                 variant="bordered"
-              />
-              <Input
+              />}
+              {data && <Input
                 label="Username"
-                defaultValue={userData.username}
+                defaultValue={data.user.username}
                 className="mb-4"
                 variant="bordered"
-              />
-              <Input
-                label="Password"
-                variant="bordered"
-                type={isVisible ? "text" : "password"}
-                endContent={
-                  <Button
-                    variant="ghost"
-                    onClick={toggleVisibility}
-                    icon={
-                      isVisible ? <EyeSlashFilledIcon /> : <EyeFilledIcon />
-                    }
-                  />
-                }
-                className="mb-4"
-              />
+              />}
             </div>
             <div>
-              <Input
+              {data && <Input
                 label="Email"
                 type="email"
-                defaultValue={userData.email}
+                defaultValue={data.user.email}
                 className="mb-4"
                 variant="bordered"
-              />
-              <Input
+              />}
+              {data && <Input
                 label="Role"
-                defaultValue={userData.role}
+                defaultValue={data.user.role}
                 className="mb-4"
                 variant="bordered"
-              />
+              />}
             </div>
-          </div>
-          <div className="mt-6">
-            <Chip variant="success">Save Changes</Chip>
           </div>
         </CardBody>
       </Card>
