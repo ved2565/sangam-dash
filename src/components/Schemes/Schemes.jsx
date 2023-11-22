@@ -23,7 +23,7 @@ import {
 import { Eye, Pen, PlusCircle, Trash } from "@phosphor-icons/react";
 import { NavLink } from "react-router-dom";
 
-const API_BASE_URL = "https://mehdb.vercel.app";
+const API_BASE_URL = "http://localhost:6969";
 
 const ConsolidatedSchemeList = () => {
   const [schemes, setSchemes] = useState([]);
@@ -38,7 +38,7 @@ const ConsolidatedSchemeList = () => {
 
   const fetchSchemes = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/getscheme`);
+      const response = await axios.get(`${API_BASE_URL}/getschemes`);
       if (response.status === 200) {
         setSchemes(response.data || []);
       } else {
@@ -113,7 +113,7 @@ const ConsolidatedSchemeList = () => {
     }
 
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         `${API_BASE_URL}/deletescheme/${editedScheme._id}`
       );
 
