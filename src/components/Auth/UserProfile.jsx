@@ -1,20 +1,26 @@
 import { useState, useEffect } from "react";
-import { Card, CardHeader, CardBody, Divider, Input } from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Divider,
+  Input,
+  Button,
+  Spacer,
+} from "@nextui-org/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {
   const navigate = useNavigate();
-  const [data, setData] = useState(null); // Initialize state with null or an appropriate default value
+  const [data, setData] = useState(null);
+
   useEffect(() => {
     const callTemp = async () => {
       try {
         const res = await axios.get("https://mehdb.vercel.app/temp", {
-          // const res = await axios.get("http://localhost:6969/temp", {
           withCredentials: true,
         });
-
-        console.log(res.data);
 
         if (res.status !== 200) {
           navigate("/login");
@@ -22,20 +28,19 @@ export default function UserProfile() {
           throw error;
         }
 
-        setData(res.data); // Update state with the received data
-        console.log("Data in state:", data); // Log the data in the state
+        setData(res.data);
       } catch (err) {
         navigate("/login");
-        console.log(err);
+        console.error(err);
       }
     };
 
-    // Call the function when the component mounts
     callTemp();
   }, [navigate]);
+
   return (
-    <div className="flex justify-center">
-      <Card className="w-full max-w-md p-4 border border-black">
+    <div className="flex justify-center items-center h-screen">
+      <Card shadow className="border border-black w-[800px]">
         <CardHeader>
           <h2 className="text-2xl font-bold">User Profile</h2>
         </CardHeader>
@@ -43,14 +48,13 @@ export default function UserProfile() {
         <CardBody>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              {/* {data && <div>Username: {data.user.firstName}</div>} */}
               {data && (
                 <Input
                   label="First Name"
                   defaultValue={data.user.firstName}
                   className="mb-4"
-                  variant="bordered"
                   readOnly
+                  variant="bordered"
                 />
               )}
               {data && (
@@ -89,6 +93,16 @@ export default function UserProfile() {
                 />
               )}
             </div>
+          </div>
+          <Spacer y={2} />
+          <div className="flex justify-end">
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => console.log("Update profile")}
+            >
+              Update Profile
+            </Button>
           </div>
         </CardBody>
       </Card>
