@@ -1,23 +1,11 @@
-import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Divider,
-  Input,
-  Button,
-  Chip,
-} from "@nextui-org/react";
+import { useState, useEffect } from "react";
+import { Card, CardHeader, CardBody, Divider, Input } from "@nextui-org/react";
 import axios from "axios";
-import { EyeSlashFilledIcon } from "../icons/EyeSlashFilledIcon";
-import { EyeFilledIcon } from "../icons/EyeFilledIcon";
 import { useNavigate } from "react-router-dom";
 
 export default function UserProfile() {
   const navigate = useNavigate();
   const [data, setData] = useState(null); // Initialize state with null or an appropriate default value
-  const [isVisible, setIsVisible] = useState(false);
-  const toggleVisibility = () => setIsVisible((v) => !v);
   useEffect(() => {
     const callTemp = async () => {
       try {
@@ -56,40 +44,50 @@ export default function UserProfile() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               {/* {data && <div>Username: {data.user.firstName}</div>} */}
-              {data && <Input
-                label="First Name"
-                defaultValue={ data.user.firstName}
-                className="mb-4"
-                variant="bordered"
-                readOnly
-              />}
-              {data && <Input
-                label="Last Name"
-                defaultValue={data.user.lastName}
-                className="mb-4"
-                variant="bordered"
-              />}
-              {data && <Input
-                label="Username"
-                defaultValue={data.user.username}
-                className="mb-4"
-                variant="bordered"
-              />}
+              {data && (
+                <Input
+                  label="First Name"
+                  defaultValue={data.user.firstName}
+                  className="mb-4"
+                  variant="bordered"
+                  readOnly
+                />
+              )}
+              {data && (
+                <Input
+                  label="Last Name"
+                  defaultValue={data.user.lastName}
+                  className="mb-4"
+                  variant="bordered"
+                />
+              )}
+              {data && (
+                <Input
+                  label="Username"
+                  defaultValue={data.user.username}
+                  className="mb-4"
+                  variant="bordered"
+                />
+              )}
             </div>
             <div>
-              {data && <Input
-                label="Email"
-                type="email"
-                defaultValue={data.user.email}
-                className="mb-4"
-                variant="bordered"
-              />}
-              {data && <Input
-                label="Role"
-                defaultValue={data.user.role}
-                className="mb-4"
-                variant="bordered"
-              />}
+              {data && (
+                <Input
+                  label="Email"
+                  type="email"
+                  defaultValue={data.user.email}
+                  className="mb-4"
+                  variant="bordered"
+                />
+              )}
+              {data && (
+                <Input
+                  label="Role"
+                  defaultValue={data.user.role}
+                  className="mb-4"
+                  variant="bordered"
+                />
+              )}
             </div>
           </div>
         </CardBody>
