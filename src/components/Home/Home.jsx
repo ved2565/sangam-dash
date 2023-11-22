@@ -1,8 +1,6 @@
-import React from "react";
 import Lenis from "@studio-freight/lenis";
 // import ImageGallery from "./ImageGallery";
 import DetailsBar from "./DetailsBar";
-import PopulationChart from "../Population/PopulationChart";
 import Schemes from "../Schemes/Schemes";
 
 const lenis = new Lenis();
