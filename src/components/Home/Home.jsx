@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Lenis from "@studio-freight/lenis";
 // import ImageGallery from "./ImageGallery";
 import DetailsBar from "./DetailsBar";
