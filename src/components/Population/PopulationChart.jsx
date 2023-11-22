@@ -24,7 +24,7 @@ const PopulationChart = () => {
           throw error;
         }
         console.log(res)
-        const sortedData = res.agePops.sort((a, b) => a.Sr.No - b.Sr.No);
+        const sortedData = res.data.agePops.sort((a, b) => a.Sr.No - b.Sr.No);
         setAgePops(sortedData);
         console.log(agePops); // Update state with the received data
       } catch (err) {
