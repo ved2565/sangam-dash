@@ -12,7 +12,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import Home from "./components/Home/Home.jsx";
 import Population from "./components/Population/Population.jsx";
 import LoginPage from "./components/Auth/LoginPage.jsx";
-// import RegisterPage from "./components/Auth/RegisterPage.jsx";
+import RegisterPage from "./components/Auth/RegisterPage.jsx";
 import UploadCSV from "./components/Utils/UploadCSV.jsx";
 import UserProfile from "./components/Auth/UserProfile.jsx";
 import Demography from "./components/Demography/Demography.jsx";
@@ -21,7 +21,7 @@ import VisnagarMap from "./components/Demography/Maps/VisnagarMap.jsx";
 // import AuthLayout from "./components/Utils/AuthLayout.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
-import Temp1 from "./components/Dump/Temp1.jsx";
+// import Temp1 from "./components/Dump/Temp1.jsx";
 
 const routes = createRoutesFromElements(
   <>
@@ -40,7 +40,7 @@ const routes = createRoutesFromElements(
       <Route path="/profile" element={<UserProfile />} />
       <Route path="/visnagar" element={<VisnagarMap />} />
       <Route path="/addscheme" element={<AddSchemes />} />
-      <Route path="/register" element={<Temp1 />} />
+      <Route path="/register" element={<RegisterPage />} />
     </Route>
     ,
     <Route path="/login" element={<LoginPage />} />,
