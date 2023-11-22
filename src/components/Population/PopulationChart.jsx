@@ -15,22 +15,29 @@ const PopulationChart = () => {
         const res = await axios.get("https://mehdb.vercel.app/agepops", {
           withCredentials: true,
         });
+        console.log("okay")
+        console.log(res.data.agePops);
 
-        if (res.status === 200) {
-          const sortedData = res.data.sort((a, b) => a['Sr.No'] - b['Sr.No']); // Sorting the data by Sr.No
-          setAgePops(sortedData);
-        } else {
-          // If status code is not 200, navigate to login page or handle as needed
-          navigate('/login'); // Update '/login' with the actual login page route
+        if (res.status !== 200) {
+          navigate("/login");
+          const error = new Error(res.error);
+          throw error;
         }
-      } catch (error) {
-        // Handle other errors, e.g., network issues
-        console.error("Error fetching data:", error);
+        const sortedData = res.data.agePops.sort((a, b) => a.Sr.No - b.Sr.No);
+        setAgePops(sortedData);
+        console.log(agePops); // Update state with the received data
+      } catch (err) {
+        navigate("/login");
+        console.log(err);
       }
+      // Handle other errors, e.g., network issues
     };
 
     getAgePops();
-  }, [navigate]); // Include history in the dependency array to prevent a stale closure warning
+  }, [navigate]); // Add navigate as a dependency to useEffect
+
+  console.log(agePops);
+// Include history in the dependency array to prevent a stale closure warning
 
   const labels = agePops
     .map((agePop, index) =>
