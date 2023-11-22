@@ -42,8 +42,7 @@ const routes = createRoutesFromElements(
       <Route path="/addscheme" element={<AddSchemes />} />
       <Route path="/register" element={<RegisterPage />} />
     </Route>
-    ,
-    <Route path="/login" element={<LoginPage />} />,
+    <Route path="/login" element={<LoginPage />} />
   </>
 );
 
