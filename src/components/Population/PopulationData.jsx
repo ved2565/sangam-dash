@@ -6,7 +6,9 @@ const PopulationData = () => {
 
   useEffect(() => {
     const getAgePops = async () => {
-      const res = await axios.get("https://mehdb.vercel.app/agepops");
+      const res = await axios.get("https://mehdb.vercel.app/agepops", {
+        withCredentials: true,
+      });
       // const res = await axios.get("http://localhost:6969/agepops");
       const sortedData = res.data.sort((a, b) => a.Sr.No - b.Sr.No); // Sorting the data by Sr.No
       setAgePops(sortedData);
@@ -14,16 +16,20 @@ const PopulationData = () => {
     getAgePops();
   }, []);
 
-  const labels = agePops.map((agePop, index) =>
-    agePops.length > 0 && index < 7 ? agePop.Taluka : "Loading..."
-  ).slice(0, 7);
+  const labels = agePops
+    .map((agePop, index) =>
+      agePops.length > 0 && index < 7 ? agePop.Taluka : "Loading..."
+    )
+    .slice(0, 7);
 
-  const data = agePops.map((agePop, index) =>
-    agePops.length > 0 && index < 7 ? agePop.Total : "Loading..."
-  ).slice(0, 7);
+  const data = agePops
+    .map((agePop, index) =>
+      agePops.length > 0 && index < 7 ? agePop.Total : "Loading..."
+    )
+    .slice(0, 7);
 
   return (
-    <div className="flex" style={{ fontSize: '16px' }} >
+    <div className="flex" style={{ fontSize: "16px" }}>
       <ul>
         {labels.map((label, index) => (
           <li className="font-bold" key={index}>

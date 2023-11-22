@@ -12,7 +12,9 @@ const PopulationChart = () => {
   useEffect(() => {
     const getAgePops = async () => {
       try {
-        const res = await axios.get("https://mehdb.vercel.app/agepops");
+        const res = await axios.get("https://mehdb.vercel.app/agepops", {
+          withCredentials: true,
+        });
 
         if (res.status === 200) {
           const sortedData = res.data.sort((a, b) => a['Sr.No'] - b['Sr.No']); // Sorting the data by Sr.No
