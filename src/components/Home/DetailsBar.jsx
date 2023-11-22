@@ -41,8 +41,8 @@ const DetailsBar = () => {
     ? selectedTalukaData["Total"]
     : "Data not available";
   return (
-    <div className="w-full justify-around flex flex-row flex-wrap bg-slate- rounded-lg">
-      <div className="flex flex-col items-center my-4 mx-2">
+    <div className="w-full justify-between flex flex-row flex-wrap bg-slate- rounded-lg">
+      <div className="flex flex-col items-center my-4">
         <Card className="border border-black">
           <CardBody className="min-w-[260px] ">
             <div className="flex justify-start items-center gap-5 ">
@@ -64,7 +64,7 @@ const DetailsBar = () => {
           </CardBody>
         </Card>
       </div>
-      <div className="flex flex-col items-center my-4 mx-2 ">
+      <div className="flex flex-col items-center my-4  ">
       <Card className="border border-black">
           <CardBody className="min-w-[260px] ">
             <div className="flex justify-start items-center gap-5 ">
@@ -86,7 +86,7 @@ const DetailsBar = () => {
           </CardBody>
         </Card>
       </div>
-      <div className="flex flex-col items-center my-4 mx-2">
+      <div className="flex flex-col items-center my-4 ">
       <Card className="border border-black">
           <CardBody className="min-w-[260px] ">
             <div className="flex justify-start items-center gap-5 ">
@@ -108,7 +108,7 @@ const DetailsBar = () => {
           </CardBody>
         </Card>
       </div>
-      <div className="flex flex-col items-center my-4 mx-2">
+      <div className="flex flex-col items-center my-4 ">
       <Card className="border border-black">
           <CardBody className="min-w-[260px] ">
             <div className="flex justify-start items-center gap-5 ">
@@ -130,7 +130,7 @@ const DetailsBar = () => {
           </CardBody>
         </Card>
       </div>
-      <div className="flex flex-col items-center my-4 mx-2">
+      <div className="flex flex-col items-center my-4 ">
       <Card className="border border-black">
           <CardBody className="min-w-[260px] ">
             <div className="flex justify-start items-center gap-5 ">
