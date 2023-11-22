@@ -9,8 +9,8 @@ const Temp1 = () => {
   useEffect(() => {
     const callTemp = async () => {
       try {
-        // const res = await axios.get("https://mehdb.vercel.app/temp", {
-        const res = await axios.get("http://localhost:6969/temp", {
+        const res = await axios.get("https://mehdb.vercel.app/temp", {
+        // const res = await axios.get("http://localhost:6969/temp", {
           withCredentials: true,
         });
 
