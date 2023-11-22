@@ -50,7 +50,7 @@ const ConsolidatedSchemeList = () => {
         const error = new Error(res.error);
         throw error;
       }
-      setSchemes(res.data);
+      setSchemes(res.data.schemes);
       console.log("Schemes:", schemes);
     } catch (error) {
       // navigate("/login")
