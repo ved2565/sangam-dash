@@ -7,35 +7,42 @@ import {
   UsersFour,
 } from "@phosphor-icons/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import {
   Card,
-  CardFooter,
-  CardHeader,
-  Divider,
   CardBody,
-  Link,
 } from "@nextui-org/react";
+import {useNavigate} from "react-router-dom"
 
 const DetailsBar = () => {
   const [agePops, setAgePops] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    const getAgePops = async (taluka) => {
+    const getAgePops = async () => {
       try {
-        const res = await axios.get("https://mehdb.vercel.app/agepops");
-        const data = res.data;
-        setAgePops(data);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-        return "Error fetching data";
+        const res = await axios.get("https://mehdb.vercel.app/agepops", {
+          withCredentials: true,
+        });
+        console.log("okay")
+        console.log(res.data.agePops);
+
+        if (res.status !== 200) {
+          navigate("/login");
+          const error = new Error(res.error);
+          throw error;
+        }
+        const sortedData = res.data.agePops.sort((a, b) => a.Sr.No - b.Sr.No);
+        setAgePops(sortedData);
+        console.log(agePops); // Update state with the received data
+      } catch (err) {
+        navigate("/login");
+        console.log(err);
       }
+      // Handle other errors, e.g., network issues
     };
 
-    getAgePops("Total").then((total) => {
-      console.log(total);
-    });
-  }, []);
+    getAgePops();
+  }, [navigate]);
   const selectedTalukaData = agePops.find((item) => item.Taluka === "Total");
   const population = selectedTalukaData
     ? selectedTalukaData["Total"]
