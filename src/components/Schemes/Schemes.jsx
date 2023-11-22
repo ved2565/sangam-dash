@@ -23,7 +23,7 @@ import {
 import { Eye, Pen, PlusCircle, Trash } from "@phosphor-icons/react";
 import { NavLink } from "react-router-dom";
 
-const API_BASE_URL = "http://localhost:6969";
+const API_BASE_URL = "https://mehdb.vercel.app";
 
 const ConsolidatedSchemeList = () => {
   const [schemes, setSchemes] = useState([]);
