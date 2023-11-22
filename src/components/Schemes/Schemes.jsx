@@ -221,8 +221,8 @@ const ConsolidatedSchemeList = () => {
               <TableCell>{scheme.ministry}</TableCell>
               <TableCell>{scheme.desc}</TableCell>
               <TableCell>{scheme.place}</TableCell>
-              <TableCell>{scheme.timeOfschemeAdded}</TableCell>
-              <TableCell>{scheme.date}</TableCell>
+              <TableCell>{scheme.moneygranted}</TableCell>
+              <TableCell>{scheme.moneyspent}</TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">
                   <Tooltip content="View Scheme">
