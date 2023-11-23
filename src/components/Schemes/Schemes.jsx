@@ -50,11 +50,11 @@ export default function App() {
   ];
 
   const statusOptions = [
-    { name: "Approved", uid: "approved" },
-    { name: "Pending Approval", uid: "pending-approval" },
-    { name: "In Progress", uid: "in-progress" },
-    { name: "Completed", uid: "completed" },
-    { name: "Pending", uid: "pending" },
+    { name: "Approved", uid: "Approved" },
+    { name: "Pending Approval", uid: "Pending Approval" },
+    { name: "In Progress", uid: "In Progress" },
+    { name: "Completed", uid: "Completed" },
+    { name: "Pending", uid: "Pending" },
   ];
 
   const statusColorMap = {
@@ -254,7 +254,7 @@ export default function App() {
     if (visibleColumns === "all") return columns;
 
     return columns.filter(
-      (column) => visibleColumns.includes(column.uid) // Change to array
+      (column) => Array.from(visibleColumns).includes(column.uid) // Change to array
     );
   }, [visibleColumns]);
 
@@ -271,7 +271,7 @@ export default function App() {
       statusFilter.length !== statusOptions.length
     ) {
       filteredSchemes = filteredSchemes.filter((scheme) =>
-        statusFilter.includes(scheme.status)
+        Array.from(statusFilter).includes(scheme.status)
       );
     }
 
