@@ -23,9 +23,14 @@ import SearchIcon from "../icons/SearchIcon";
 import ChevronDownIcon from "../icons/ChevronDownIcon";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/react";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-
 
 export default function App() {
   const API_BASE_URL = "https://mehdb.vercel.app";
@@ -38,6 +43,8 @@ export default function App() {
     { name: "PLACE", uid: "place" },
     { name: "FUND GRANTED", uid: "moneygranted", sortable: true },
     { name: "FUND SPENT", uid: "moneyspent", sortable: true },
+    { name: "LEAD PERSON", uid: "leadperson", sortable: true },
+    { name: "LAST EDITED BY", uid: "lasteditedby", sortable: true },
     { name: "STATUS", uid: "status", sortable: true },
     { name: "ACTIONS", uid: "actions" },
   ];
@@ -66,6 +73,8 @@ export default function App() {
     "place",
     "moneygranted",
     "moneyspent",
+    "leadperson",
+    "lasteditedby",
     "status",
     "actions",
   ];
@@ -74,8 +83,9 @@ export default function App() {
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState(
+    // new Set(INITIAL_VISIBLE_COLUMNS) // Change to array
     INITIAL_VISIBLE_COLUMNS
-  ); // Change to array
+  );
   const [statusFilter, setStatusFilter] = React.useState("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState({
@@ -406,7 +416,9 @@ export default function App() {
                 closeOnSelect={false}
                 selectedKeys={statusFilter}
                 selectionMode="multiple"
-                onSelectionChange={setStatusFilter}
+                onSelectionChange={(selected) =>
+                  setStatusFilter(selected.length === 0 ? ["all"] : selected)
+                }
               >
                 {statusOptions.map((status) => (
                   <DropdownItem key={status.uid} className="capitalize">
