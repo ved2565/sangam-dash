@@ -5,9 +5,10 @@ import { Spinner } from "@nextui-org/react";
 
 const VisnagarMap = () => {
   const [visnagarTotal, setVisnagarTotal] = useState(null);
+  const [visnagarData, setVisnagarData] = useState(null);
 
   useEffect(() => {
-    const fetchDataForVisnagar = async () => {
+    const fetchPopsDataVisnagar = async () => {
       try {
         const response = await axios.get("https://mehdb.vercel.app/agepops", {
           withCredentials: true,
@@ -31,13 +32,45 @@ const VisnagarMap = () => {
       }
     };
 
-    fetchDataForVisnagar();
+    const fetchVisnagarData = async () => {
+      try {
+        const response = await axios.get(
+          "https://mehdb.vercel.app/getcitiesdata",
+          {
+            withCredentials: true,
+          }
+        );
+
+        // Check if the response has data
+        if (response.data && Array.isArray(response.data.data)) {
+          // Find the data for Visnagar in the array
+          const visnagarData = response.data.data.find(
+            (city) => city.talukaName === "Visnagar"
+          );
+
+          // Check if Visnagar data is found
+          if (visnagarData) {
+            console.log("Visnagar data:", visnagarData);
+            setVisnagarData(visnagarData);
+          } else {
+            console.log("Visnagar data not found");
+          }
+        } else {
+          console.log("Invalid response format");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+
+    fetchVisnagarData();
+    fetchPopsDataVisnagar();
   }, []);
 
   return (
     <div className="w-full my-2 flex justify-around items-center min-h-screen">
       <Card className="border border-black">
-        <CardBody >
+        <CardBody>
           <svg
             width="400"
             height=""
@@ -60,6 +93,69 @@ const VisnagarMap = () => {
         <CardBody>
           <p>
             {visnagarTotal ? `Total population: ${visnagarTotal}` : <Spinner />}
+          </p>
+          <p>
+            {visnagarData ? (
+              ` No of Schools: ${visnagarData.noOfSchools}`
+            ) : (
+              <Spinner />
+            )}
+          </p>
+          <p>
+            {visnagarData ? (
+              ` No of Colleges: ${visnagarData.noOfColleges}`
+            ) : (
+              <Spinner />
+            )}
+          </p>
+          <p>
+            {visnagarData ? (
+              ` No of Universities: ${visnagarData.noOfUniversities}`
+            ) : (
+              <Spinner />
+            )}
+          </p>
+          <p>
+            {visnagarData ? (
+              ` No of Bus Stations: ${visnagarData.noOfBusStations}`
+            ) : (
+              <Spinner />
+            )}
+          </p>
+          <p>
+            {visnagarData ? (
+              ` No of Railway Stations: ${visnagarData.noOfRailwayStations}`
+            ) : (
+              <Spinner />
+            )}
+          </p>
+          <p>
+            {visnagarData ? (
+              ` No of Post Offices: ${visnagarData.noOfPostOffices}`
+            ) : (
+              <Spinner />
+            )}
+          </p>
+          <p>
+            {visnagarData ? (
+              ` No of Police Stations: ${visnagarData.noOfPoliceStations}`
+            ) : (
+              <Spinner />
+            )}
+          </p>
+          <p>
+            {visnagarData ? (
+              ` No of Fire Stations: ${visnagarData.noOfFireStations}`
+            ) : (
+              <Spinner />
+            )}
+          </p>
+          <p>
+            {visnagarData ? (
+              ` No of Hospitals: ${visnagarData.noOfHospitals}`
+            ) : (
+              <Spinner />
+            )}
           </p>
         </CardBody>
       </Card>
