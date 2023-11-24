@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../../../src/index.css"; // You can create a separate CSS file for styles
