@@ -1,12 +1,6 @@
 // AddSchemes.jsx
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Divider,
-  Input,
-} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Divider, Input } from "@nextui-org/react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +32,7 @@ const AddSchemes = () => {
         },
         { withCredentials: true }
       );
-  
+
       if (response.status === 201) {
         toast.success("Scheme added successfully!");
         navigate("/");
@@ -49,10 +43,7 @@ const AddSchemes = () => {
       console.error("Error:", error);
       toast.error("Error adding scheme");
     }
-  };  
-useEffect(() => {
-  handleAddScheme();
-}, [navigate]);
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen scroll-m-0">
