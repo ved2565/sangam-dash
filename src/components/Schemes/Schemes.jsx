@@ -16,6 +16,7 @@ import {
   DropdownItem,
   Chip,
   Pagination,
+  Spinner,
 } from "@nextui-org/react";
 import PlusIcon from "../icons/PlusIcon";
 import VerticalDotsIcon from "../icons/VerticalDotsIcon";
@@ -31,6 +32,7 @@ import {
   ModalFooter,
 } from "@nextui-org/react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { Trash } from "@phosphor-icons/react";
 
 export default function App() {
   const API_BASE_URL = "https://mehdb.vercel.app";
@@ -104,7 +106,6 @@ export default function App() {
     deleteMode: false,
   });
   const [editedScheme, setEditedScheme] = useState({});
-
   const fetchSchemes = async () => {
     try {
       const res = await axios.get(`${API_BASE_URL}/getschemes`, {
@@ -225,6 +226,69 @@ export default function App() {
       }
     } catch (error) {
       toast.error("Error deleting scheme:", error.message);
+    }
+  };
+
+  const handleBulkDelete = async () => {
+    console.log("Bulk Delete Schemes:", selectedKeys);
+
+    // Check if no schemes selected
+    if (selectedKeys.size === 0) {
+      console.error("No schemes selected for deletion");
+      return;
+    }
+
+    // Check if all items are selected
+    const allItemsSelected =
+      selectedKeys.size === filteredItems.length && filteredItems.length !== 0;
+
+    try {
+      console.log("Bulk Delete Request:", {
+        schemes: allItemsSelected ? [] : Array.from(selectedKeys),
+      });
+
+      const response = await axios.post(
+        `${API_BASE_URL}/bulkdelete`,
+        {
+          schemes: allItemsSelected ? [] : Array.from(selectedKeys),
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log("Bulk Delete Response:", response.data);
+
+      if (response.status === 200) {
+        // Update state accordingly
+        if (allItemsSelected) {
+          setSchemes([]);
+        } else {
+          setSchemes((prevSchemes) =>
+            prevSchemes.filter((scheme) => !selectedKeys.has(scheme._id))
+          );
+        }
+
+        setSelectedKeys(new Set([]));
+
+        const selectedSchemes = filteredItems.filter((scheme) =>
+          selectedKeys.has(scheme._id)
+        );
+        console.log("Selected Schemes:", selectedSchemes);
+
+        const successToast = toast.success("Schemes deleted successfully!");
+        await successToast.promise;
+      } else {
+        toast.error("Failed to delete schemes.");
+      }
+
+      setModalData({
+        ...modalData,
+        isOpen: false,
+      });
+    } catch (error) {
+      console.error("Error deleting schemes:", error.message);
+      toast.error("Error deleting schemes:", error.message);
     }
   };
 
@@ -456,6 +520,15 @@ export default function App() {
                 Add New
               </Button>
             </NavLink>
+            <NavLink>
+              <Button
+                color="danger"
+                endContent={<Trash size={22} />}
+                onClick={handleBulkDelete}
+              >
+                Bulk Delete
+              </Button>
+            </NavLink>
           </div>
         </div>
         <div className="flex justify-between items-center">
@@ -563,7 +636,7 @@ export default function App() {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody emptyContent={"No schemes found"} items={sortedItems}>
+        <TableBody emptyContent={<Spinner />} items={sortedItems}>
           {(item, index) => (
             <TableRow key={item.srno || index}>
               {(columnKey) => (
@@ -594,6 +667,7 @@ const SchemeModal = ({
   onDelete,
   onClose,
   onInputChange,
+  statusOptions,
 }) => {
   const { isOpen, schemeDetails, editMode, deleteMode } = modalData;
 
@@ -636,7 +710,35 @@ const SchemeModal = ({
                 value={editedScheme.place}
                 onChange={(e) => onInputChange("place", e.target.value)}
               />
-              {/* Add other input fields for editing scheme details */}
+              <Input
+                label="Fund Spend"
+                value={editedScheme.moneyspent}
+                onChange={(e) => onInputChange("moneyspent", e.target.value)}
+              />
+              <Dropdown
+                className="my-2"
+                selectedKey={editedScheme.status}
+                onSelect={(selected) => onInputChange("status", selected)}
+              >
+                <DropdownTrigger>
+                  <Button color="primary" variant="light">
+                    {editedScheme.status}
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu>
+                  {[
+                    "Approved",
+                    "Pending Approval",
+                    "In Progress",
+                    "Completed",
+                    "Pending",
+                  ].map((status) => (
+                    <DropdownItem key={status} onClick={() => onInputChange("status", status)}>
+                      {status}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
             </>
           )}
         </ModalBody>
