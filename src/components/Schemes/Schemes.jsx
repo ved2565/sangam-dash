@@ -30,7 +30,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function App() {
   const API_BASE_URL = "https://mehdb.vercel.app";
@@ -451,9 +451,11 @@ export default function App() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button color="primary" endContent={<PlusIcon />}>
-              Add New
-            </Button>
+            <NavLink to="/addscheme">
+              <Button color="primary" endContent={<PlusIcon />}>
+                Add New
+              </Button>
+            </NavLink>
           </div>
         </div>
         <div className="flex justify-between items-center">

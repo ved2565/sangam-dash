@@ -1,44 +1,64 @@
-// RegisterPage.js
-import React, { useState } from "react";
+// AddSchemes.jsx
+import { useEffect, useState } from "react";
 import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   Divider,
   Input,
 } from "@nextui-org/react";
 import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddSchemes = () => {
   const [schemename, setSchemeName] = useState("");
   const [ministry, setMinistry] = useState("");
   const [desc, setDesc] = useState("");
   const [place, setPlace] = useState("");
-  const [message, setMessage] = useState("");
+  const [moneygranted, setMoneyGranted] = useState("");
+  const [moneyspent, setMoneySpent] = useState("");
+  const [status, setStatus] = useState("");
+  const [leadperson, setLeadPerson] = useState("");
+  const navigate = useNavigate();
 
   const handleAddScheme = async () => {
     try {
-      const response = await axios.post("https://mehdb.vercel.app/addScheme", {
-        schemename,
-        ministry,
-        desc,
-        place,
-      });
-
+      const response = await axios.post(
+        "https://mehdb.vercel.app/addScheme",
+        {
+          schemename,
+          ministry,
+          desc,
+          place,
+          moneygranted,
+          moneyspent,
+          status,
+          leadperson,
+        },
+        { withCredentials: true }
+      );
+  
       if (response.status === 201) {
-        setMessage("Scheme added successfully!");
+        toast.success("Scheme added successfully!");
+        navigate("/");
       } else if (response.status === 401) {
-        setMessage("Adding failed");
+        toast.error("Unauthorized");
       }
     } catch (error) {
       console.error("Error:", error);
-      setMessage(`Internal server error: ${error.message}`);
+      toast.error("Error adding scheme");
     }
-  };
+  };  
+useEffect(() => {
+  handleAddScheme();
+}, [navigate]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen scroll-m-0">
+      <div>
+        <Toaster />
+      </div>
       <Card className="w-96 border border-black ">
         <CardHeader className="flex gap-3">
           <div className="text-xl font-bold">Add Scheme</div>
@@ -78,6 +98,38 @@ const AddSchemes = () => {
               value={place}
               onChange={(e) => setPlace(e.target.value)}
             />
+            <Input
+              size="lg"
+              type="text"
+              label="Fund Granted"
+              className="my-2"
+              value={moneygranted}
+              onChange={(e) => setMoneyGranted(e.target.value)}
+            />
+            <Input
+              size="lg"
+              type="text"
+              label="Fund Spent"
+              className="my-2"
+              value={moneyspent}
+              onChange={(e) => setMoneySpent(e.target.value)}
+            />
+            <Input
+              size="lg"
+              type="text"
+              label="Status"
+              className="my-2"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            />
+            <Input
+              size="lg"
+              type="text"
+              label="Lead Person"
+              className="my-2"
+              value={leadperson}
+              onChange={(e) => setLeadPerson(e.target.value)}
+            />
             <button
               type="button"
               onClick={handleAddScheme}
@@ -89,9 +141,6 @@ const AddSchemes = () => {
           </form>
         </CardBody>
         <Divider />
-        <CardFooter>
-          <div>{message && <p>{message}</p>}</div>
-        </CardFooter>
       </Card>
     </div>
   );
