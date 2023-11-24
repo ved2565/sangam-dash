@@ -18,9 +18,19 @@ import UserProfile from "./components/Auth/UserProfile.jsx";
 import Demography from "./components/Demography/Demography.jsx";
 import AddSchemes from "./components/Schemes/AddSchemes.jsx";
 import VisnagarMap from "./components/Demography/Maps/VisnagarMap.jsx";
+import SatlasanaMap from "./components/Demography/Maps/SatlasanaMap.jsx";
+import KheraluMap from "./components/Demography/Maps/KheraluMap.jsx";
+import KadiMap from "./components/Demography/Maps/KadiMap.jsx";
+import MahesanaMap from "./components/Demography/Maps/MahesanaMap.jsx";
+import BechrajiMap from "./components/Demography/Maps/BechrajiMap.jsx";
+import JotanaMap from "./components/Demography/Maps/JotanaMap.jsx";
+import VadnagarMap from "./components/Demography/Maps/VadnagarMap.jsx";
+import VijapurMap from "./components/Demography/Maps/VijapurMap.jsx";
+import UnjhaMap from "./components/Demography/Maps/UnjhaMap.jsx";
 // import AuthLayout from "./components/Utils/AuthLayout.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
+
 // import Temp1 from "./components/Dump/Temp1.jsx";
 
 const routes = createRoutesFromElements(
@@ -29,7 +39,7 @@ const routes = createRoutesFromElements(
       path="/"
       element={
         // <AuthLayout authentication={true}>
-          <App />
+        <App />
         // </AuthLayout>
       }
     >
@@ -39,6 +49,16 @@ const routes = createRoutesFromElements(
       <Route path="/demography" element={<Demography />} />
       <Route path="/profile" element={<UserProfile />} />
       <Route path="/visnagar" element={<VisnagarMap />} />
+      <Route path="/kheralu" element={<KheraluMap />} />
+      <Route path="/satlasana" element={<SatlasanaMap />} />
+      <Route path="/kadi" element={<KadiMap />} />
+      <Route path="/bechraji" element={<BechrajiMap />} />
+      <Route path="/mahesana" element={<MahesanaMap />} />
+      <Route path="/jotana" element={<JotanaMap />} />
+      <Route path="/unjha" element={<UnjhaMap />} />
+      <Route path="/vadnagar" element={<VadnagarMap />} />
+      <Route path="/vijapur" element={<VijapurMap />} />
+      {/* <Route path="/temp1" element={<KheraluMap />} /> */}
       <Route path="/addscheme" element={<AddSchemes />} />
       <Route path="/register" element={<RegisterPage />} />
     </Route>
