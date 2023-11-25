@@ -60,11 +60,11 @@ export default function App() {
   ];
 
   const statusColorMap = {
-    approved: "success",
-    "pending-approval": "warning",
-    "in-progress": "primary",
-    completed: "success",
-    pending: "warning",
+    Approved: "success",
+    "Pending Approval": "warning",
+    "In Progress": "primary",
+    Completed: "success",
+    Pending: "warning",
   };
 
   const INITIAL_VISIBLE_COLUMNS = [
