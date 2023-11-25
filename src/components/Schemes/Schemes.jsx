@@ -17,6 +17,7 @@ import {
   Chip,
   Pagination,
   Spinner,
+  Progress,
 } from "@nextui-org/react";
 import PlusIcon from "../icons/PlusIcon";
 import VerticalDotsIcon from "../icons/VerticalDotsIcon";
@@ -48,6 +49,7 @@ export default function App() {
     { name: "LEAD PERSON", uid: "leadperson", sortable: true },
     { name: "LAST EDITED BY", uid: "lasteditedby", sortable: true },
     { name: "STATUS", uid: "status", sortable: true },
+    { name: "PROGRESS", uid: "progress", sortable: true },
     { name: "ACTIONS", uid: "actions" },
   ];
 
@@ -78,6 +80,7 @@ export default function App() {
     "leadperson",
     "lasteditedby",
     "status",
+    "progress",
     "actions",
   ];
 
@@ -327,7 +330,11 @@ export default function App() {
 
     if (hasSearchFilter) {
       filteredSchemes = filteredSchemes.filter((scheme) =>
-        scheme.schemename.toLowerCase().includes(filterValue.toLowerCase())
+      // allow search by scheme name, ministry, place, status, progress
+        scheme.schemename.toLowerCase().includes(filterValue.toLowerCase()) || 
+        scheme.ministry.toLowerCase().includes(filterValue.toLowerCase()) ||
+        scheme.place.toLowerCase().includes(filterValue.toLowerCase()) ||
+        scheme.status.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
     if (
@@ -388,6 +395,17 @@ export default function App() {
           >
             {cellValue}
           </Chip>
+        );
+      case "progress":
+        return (
+          <Progress
+            // set showValueLabel to true if value is != NaN and != 0
+            showValueLabel={scheme.progress !== 0 && !isNaN(scheme.progress)}
+            color={statusColorMap[scheme.status]}
+            value={scheme.progress}
+            size="sm"
+            className="max-w-md"
+          />
         );
       case "actions":
         return (
@@ -458,7 +476,7 @@ export default function App() {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by name..."
+            placeholder="Search by name... or anything else"
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}
@@ -732,7 +750,10 @@ const SchemeModal = ({
                     "Completed",
                     "Pending",
                   ].map((status) => (
-                    <DropdownItem key={status} onClick={() => onInputChange("status", status)}>
+                    <DropdownItem
+                      key={status}
+                      onClick={() => onInputChange("status", status)}
+                    >
                       {status}
                     </DropdownItem>
                   ))}
