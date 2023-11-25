@@ -97,6 +97,7 @@ export default function UserProfile() {
           <Spacer y={2} />
           <div className="flex justify-end">
             <Button
+              type="button"
               variant="contained"
               color="success"
               onClick={() => console.log("Update profile")}
