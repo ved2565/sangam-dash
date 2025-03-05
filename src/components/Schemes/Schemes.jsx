@@ -17,6 +17,7 @@ import {
   Chip,
   Pagination,
   Spinner,
+  Progress,
 } from "@nextui-org/react";
 import PlusIcon from "../icons/PlusIcon";
 import VerticalDotsIcon from "../icons/VerticalDotsIcon";
@@ -32,7 +33,7 @@ import {
   ModalFooter,
 } from "@nextui-org/react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Trash } from "@phosphor-icons/react";
+// import { Trash } from "@phosphor-icons/react";
 
 export default function App() {
   const API_BASE_URL = "https://mehdb.vercel.app";
@@ -48,6 +49,7 @@ export default function App() {
     { name: "LEAD PERSON", uid: "leadperson", sortable: true },
     { name: "LAST EDITED BY", uid: "lasteditedby", sortable: true },
     { name: "STATUS", uid: "status", sortable: true },
+    { name: "PROGRESS", uid: "progress", sortable: true },
     { name: "ACTIONS", uid: "actions" },
   ];
 
@@ -60,11 +62,11 @@ export default function App() {
   ];
 
   const statusColorMap = {
-    approved: "success",
-    "pending-approval": "warning",
-    "in-progress": "primary",
-    completed: "success",
-    pending: "warning",
+    Approved: "success",
+    "Pending Approval": "warning",
+    "In Progress": "primary",
+    Completed: "success",
+    Pending: "warning",
   };
 
   const INITIAL_VISIBLE_COLUMNS = [
@@ -78,6 +80,7 @@ export default function App() {
     "leadperson",
     "lasteditedby",
     "status",
+    "progress",
     "actions",
   ];
 
@@ -229,68 +232,68 @@ export default function App() {
     }
   };
 
-  const handleBulkDelete = async () => {
-    console.log("Bulk Delete Schemes:", selectedKeys);
+  // const handleBulkDelete = async () => {
+  //   console.log("Bulk Delete Schemes:", selectedKeys);
 
-    // Check if no schemes selected
-    if (selectedKeys.size === 0) {
-      console.error("No schemes selected for deletion");
-      return;
-    }
+  //   // Check if no schemes selected
+  //   if (selectedKeys.size === 0) {
+  //     console.error("No schemes selected for deletion");
+  //     return;
+  //   }
 
-    // Check if all items are selected
-    const allItemsSelected =
-      selectedKeys.size === filteredItems.length && filteredItems.length !== 0;
+  //   // Check if all items are selected
+  //   const allItemsSelected =
+  //     selectedKeys.size === filteredItems.length && filteredItems.length !== 0;
 
-    try {
-      console.log("Bulk Delete Request:", {
-        schemes: allItemsSelected ? [] : Array.from(selectedKeys),
-      });
+  //   try {
+  //     console.log("Bulk Delete Request:", {
+  //       schemes: allItemsSelected ? [] : Array.from(selectedKeys),
+  //     });
 
-      const response = await axios.post(
-        `${API_BASE_URL}/bulkdelete`,
-        {
-          schemes: allItemsSelected ? [] : Array.from(selectedKeys),
-        },
-        {
-          withCredentials: true,
-        }
-      );
+  //     const response = await axios.post(
+  //       `${API_BASE_URL}/bulkdelete`,
+  //       {
+  //         schemes: allItemsSelected ? [] : Array.from(selectedKeys),
+  //       },
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
 
-      console.log("Bulk Delete Response:", response.data);
+  //     console.log("Bulk Delete Response:", response.data);
 
-      if (response.status === 200) {
-        // Update state accordingly
-        if (allItemsSelected) {
-          setSchemes([]);
-        } else {
-          setSchemes((prevSchemes) =>
-            prevSchemes.filter((scheme) => !selectedKeys.has(scheme._id))
-          );
-        }
+  //     if (response.status === 200) {
+  //       // Update state accordingly
+  //       if (allItemsSelected) {
+  //         setSchemes([]);
+  //       } else {
+  //         setSchemes((prevSchemes) =>
+  //           prevSchemes.filter((scheme) => !selectedKeys.has(scheme._id))
+  //         );
+  //       }
 
-        setSelectedKeys(new Set([]));
+  //       setSelectedKeys(new Set([]));
 
-        const selectedSchemes = filteredItems.filter((scheme) =>
-          selectedKeys.has(scheme._id)
-        );
-        console.log("Selected Schemes:", selectedSchemes);
+  //       const selectedSchemes = filteredItems.filter((scheme) =>
+  //         selectedKeys.has(scheme._id)
+  //       );
+  //       console.log("Selected Schemes:", selectedSchemes);
 
-        const successToast = toast.success("Schemes deleted successfully!");
-        await successToast.promise;
-      } else {
-        toast.error("Failed to delete schemes.");
-      }
+  //       const successToast = toast.success("Schemes deleted successfully!");
+  //       await successToast.promise;
+  //     } else {
+  //       toast.error("Failed to delete schemes.");
+  //     }
 
-      setModalData({
-        ...modalData,
-        isOpen: false,
-      });
-    } catch (error) {
-      console.error("Error deleting schemes:", error.message);
-      toast.error("Error deleting schemes:", error.message);
-    }
-  };
+  //     setModalData({
+  //       ...modalData,
+  //       isOpen: false,
+  //     });
+  //   } catch (error) {
+  //     console.error("Error deleting schemes:", error.message);
+  //     toast.error("Error deleting schemes:", error.message);
+  //   }
+  // };
 
   const handleCloseModal = () => {
     console.log("Close Modal");
@@ -327,7 +330,11 @@ export default function App() {
 
     if (hasSearchFilter) {
       filteredSchemes = filteredSchemes.filter((scheme) =>
-        scheme.schemename.toLowerCase().includes(filterValue.toLowerCase())
+      // allow search by scheme name, ministry, place, status, progress
+        scheme.schemename.toLowerCase().includes(filterValue.toLowerCase()) || 
+        scheme.ministry.toLowerCase().includes(filterValue.toLowerCase()) ||
+        scheme.place.toLowerCase().includes(filterValue.toLowerCase()) ||
+        scheme.status.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
     if (
@@ -388,6 +395,17 @@ export default function App() {
           >
             {cellValue}
           </Chip>
+        );
+      case "progress":
+        return (
+          <Progress
+            // set showValueLabel to true if value is != NaN and != 0
+            showValueLabel={scheme.progress !== 0 && !isNaN(scheme.progress)}
+            color={statusColorMap[scheme.status]}
+            value={scheme.progress}
+            size="sm"
+            className="max-w-md"
+          />
         );
       case "actions":
         return (
@@ -458,7 +476,7 @@ export default function App() {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by name..."
+            placeholder="Search by name... or anything else"
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}
@@ -520,7 +538,7 @@ export default function App() {
                 Add New
               </Button>
             </NavLink>
-            <NavLink>
+            {/* <NavLink>
               <Button
                 color="danger"
                 endContent={<Trash size={22} />}
@@ -528,7 +546,7 @@ export default function App() {
               >
                 Bulk Delete
               </Button>
-            </NavLink>
+            </NavLink> */}
           </div>
         </div>
         <div className="flex justify-between items-center">
@@ -667,7 +685,6 @@ const SchemeModal = ({
   onDelete,
   onClose,
   onInputChange,
-  statusOptions,
 }) => {
   const { isOpen, schemeDetails, editMode, deleteMode } = modalData;
 
@@ -733,7 +750,10 @@ const SchemeModal = ({
                     "Completed",
                     "Pending",
                   ].map((status) => (
-                    <DropdownItem key={status} onClick={() => onInputChange("status", status)}>
+                    <DropdownItem
+                      key={status}
+                      onClick={() => onInputChange("status", status)}
+                    >
                       {status}
                     </DropdownItem>
                   ))}
